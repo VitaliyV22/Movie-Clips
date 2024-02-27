@@ -16,7 +16,7 @@ export const Header = () => {
           <Link to={"/favorites"}>My Favorites</Link>
         </nav>
       </div>
-      <div className="-mr-2 flex md:hidden">
+      <div className="mr-2 flex md:hidden">
         <button
           onClick={handleClick}
           className="inline-flex items-center justify-center p-2 rounded-md font-bold"

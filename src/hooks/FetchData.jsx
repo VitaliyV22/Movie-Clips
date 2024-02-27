@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-export const Movies = () => {
+export const FetchData = () => {
   const apiUrl = "https://api.themoviedb.org/3/movie/changes";
-  const APITOKEN = import.meta.env.VITE_API_KEY
+  const APITOKEN = process.env.NEXT_PUBLIC_API_KEY;
 
   const options = {
     method: "GET",
@@ -17,7 +17,5 @@ export const Movies = () => {
     .then((response) => console.log(response))
     .catch((err) => console.error(err));
 
-  return (
-    <div>Movies</div>
-  )
-}
+  return <div>FetchData</div>;
+};
