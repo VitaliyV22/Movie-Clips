@@ -15,8 +15,9 @@ export const mutationLogin = async () => {
   axios
     .request(guestSess)
     .then(function (response) {
+      // setting the guest ID to local storage 
       const guestID = response.data.guest_session_id
-      console.log(guestID);
+      
       localStorage.setItem("guest_id", guestID);
     })
     .catch(function (error) {
