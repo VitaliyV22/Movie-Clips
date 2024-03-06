@@ -1,10 +1,13 @@
 import React from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { mutationLogin } from './Mutation'
+
 
 export const Auth = () => {
 
     const handleLogin = () => {
-
-    }
+    const {} = useMutation({mutationKey: ["login"], mutationFn: mutationLogin})
+     }
   return (
     <div>
         <div className='flex items-center justify-center w-screen h-screen'>
