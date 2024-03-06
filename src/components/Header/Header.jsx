@@ -12,7 +12,7 @@ export const Header = () => {
           <Link to={"/"}>Movie Clips</Link>
           <Link to={"/movies"}>Movies</Link>
           <Link to={"/shows"}>Tv Shows</Link>
-          <Link to={"/people"}>People</Link>
+          <Link to={"/auth"}>Login</Link>
           <Link to={"/favorites"}>My Favorites</Link>
         </nav>
       </div>
@@ -29,7 +29,7 @@ export const Header = () => {
           <Link to={"/"}>Movie Clips</Link>
           <Link to={"/movies"}>Movies</Link>
           <Link to={"/shows"}>Tv Shows</Link>
-          <Link to={"/people"}>People</Link>
+         
           <Link to={"/favorites"}>My Favorites</Link>
         </div>
       </div>

@@ -36,13 +36,17 @@ export const Home = () => {
     return <div>Loading ...</div>;
   }
   if (error) {
-    return <div>Error, please try again.</div>;
+    return <div>
+        
+    </div>;
   }
 
   return <div>
 
     <div>
-      
+    <div>
+          {}
+          </div>
     </div>
   </div>;
 };
