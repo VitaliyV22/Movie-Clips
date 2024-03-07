@@ -8,12 +8,19 @@ export const Header = () => {
   return (
     <div>
       <div>
-        <nav className=" hidden md:flex gap-5 justify-start font-bold text-2xl fixed w-full top-0 z-50 bg-gray-200">
-          <Link to={"/"}>Movie Clips</Link>
-          <Link to={"/movies"}>Movies</Link>
-          <Link to={"/shows"}>Tv Shows</Link>
-          <Link to={"/auth"}>Login</Link>
-          <Link to={"/favorites"}>My Favorites</Link>
+        <nav className=" hidden md:flex gap-5 p-5 justify-start items-center font-semibold text-lg fixed w-full border rounded-b-lg top-0 z-50 bg-white h-[4rem]">
+          <div>
+            <Link className="font-bold text-2xl hover:text-red-700" to={"/"}>
+              Movie Clips
+            </Link>
+          </div>
+          <div className="flex gap-5">
+            <Link to={"/movies"}>Movies</Link>
+            <Link to={"/shows"}>Tv Shows</Link>
+
+            <Link to={"/favorites"}>My Favorites</Link>
+            <Link to={"/auth"}>Login</Link>
+          </div>
         </nav>
       </div>
       <div className="mr-2 flex md:hidden">
