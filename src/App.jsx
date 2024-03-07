@@ -8,16 +8,16 @@ import { Favorites } from "./pages/Favorites/Favorites";
 import { Auth } from "./pages/Auth/Auth";
 
 function App() {
-  
-
   return (
     <>
       <Router>
-        <Header />
+        <div className="pb-10">
+          <Header />
+        </div>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
-          
           <Route path="/movies" element={<Movies />} />
           <Route path="/shows" element={<Shows />} />
           <Route path="/favorites" element={<Favorites />} />

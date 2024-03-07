@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
+import { PopularMovies } from "../../components/PopularMovies/PopularMovies";
 
 export const Home = () => {
   return (
     <div>
-      <div>
-        <div>{}</div>
-      </div>
+      <PopularMovies />
     </div>
   );
 };

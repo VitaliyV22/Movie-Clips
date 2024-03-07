@@ -20,7 +20,9 @@ const useDataFetch = (url) => {
     try {
       
       const response = await axios.get(url, options);
+      
       setData(response.data);
+      
     } catch (error) {
       setError(error);
     } finally {
