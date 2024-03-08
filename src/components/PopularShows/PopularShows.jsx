@@ -3,9 +3,9 @@ import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export const PopularMovies = () => {
+export const PopularShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/movie/now_playing"
+    "https://api.themoviedb.org/3/tv/airing_today"
   );
   if (isLoading) {
     return <div>Loading...</div>;
@@ -42,7 +42,6 @@ export const PopularMovies = () => {
 
   return (
     <div>
-      
       <div>
         <Carousel
           draggable={false}
@@ -55,24 +54,24 @@ export const PopularMovies = () => {
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
-          {data.results.map((movie) => (
+          {data.results.map((show) => (
             <div
               className="flex flex-col justify-start items-center"
-              key={movie.id}
+              key={show.id}
             >
               <div className="mb-2">
                 <img
                   className="object-fill rounded-md h-[250px] w-[155px] "
                   src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                    "https://image.tmdb.org/t/p/original/" + show.poster_path
                   }
                   alt=""
                 />
               </div>
-              <h1 className="font-bold">{movie.title}</h1>
-              <p>{movie.release_date}</p>
+              <h1 className="font-bold">{show.title}</h1>
+              <p>{show.release_date}</p>
               <p className="font-bold relative text-black">
-                Rating : {movie.vote_average}{" "}
+                Rating : {show.vote_average}{" "}
               </p>
               <button className="border  bg-yellow-500 rounded-md text-sm p-1 font-bold">
                 Add To Favorites
