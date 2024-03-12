@@ -3,9 +3,9 @@ import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export const PopularMovies = () => {
+export const TopRatedShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
+    "https://api.themoviedb.org/3/tv/top_rated"
   );
   if (isLoading) {
     return (
@@ -35,7 +35,6 @@ export const PopularMovies = () => {
     );
   }
 
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -53,7 +52,6 @@ export const PopularMovies = () => {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-
   return (
     <div>
       <div>

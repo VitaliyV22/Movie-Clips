@@ -5,21 +5,34 @@ import "react-multi-carousel/lib/styles.css";
 
 export const PopularShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/tv/airing_today"
+    "https://api.themoviedb.org/3/trending/tv/day?language=en-US"
   );
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-center font-bold text-yellow-400 text-2xl">
+        Loading...
+      </div>
+    );
   }
   if (error) {
     return (
-      <div>
+      <div className="text-center font-bold  text-2xl">
         Error : {error.message}
-        <button onClick={refetch}>Retry</button>
+        <button
+          className="text-center m-5 font-bold border bg-red-500 rounded-md p-2 text-yellow-400 text-2xl"
+          onClick={refetch}
+        >
+          Retry
+        </button>
       </div>
     );
   }
   if (!data || !data.results) {
-    return <div>No data available.</div>;
+    return (
+      <div className="text-center font-bold text-yellow-400 text-2xl">
+        No data available...
+      </div>
+    );
   }
 
   const responsive = {

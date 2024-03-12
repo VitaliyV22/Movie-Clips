@@ -2,31 +2,23 @@ import React, { useState } from "react";
 import { PopularMovies } from "../../components/PopularMovies/PopularMovies";
 import { Banner } from "../../components/Banner/Banner";
 import { PopularShows } from "../../components/PopularShows/PopularShows";
+import { TopRatedMovies } from "../../components/TopRatedMovies/TopRatedMovies";
+import { TopRatedShows } from "../../components/TopRatedShows/TopRatedShows";
 
 export const Home = () => {
-  const [show, setShow] = useState(false);
-  const [movie, setMovie] = useState(true);
-  const [showClicked, setShowClicked] = useState(false);
-  const [movieClicked, setMovieClicked] = useState(true);
 
-  const showTVShows = () => {
-    // hide movies on click so only shows display
-    setMovie(false);
-    setShow(true);
-    // changing button color on click
-    setShowClicked(true);
-    setMovieClicked(false)
-  };
+  const [isMovieSelected, setIsMovieSelected] = useState(true)
 
   const showMovies = () => {
-    // hide shows on click so only shows movies
-    setMovie(true);
-    setShow(false);
-    setMovieClicked(true)
-    setShowClicked(false);
+    setIsMovieSelected(true)
+  }
+
+
+  const showTVShows = () => {
+    setIsMovieSelected(false)
   };
 
-
+ 
 
   return (
     <div>
@@ -36,22 +28,25 @@ export const Home = () => {
         <div className="flex ml-[10px] gap-5 items-center  ">
           <button
             onClick={showMovies}
-            className={`font-bold text-lg border p-2 rounded-md ${movieClicked ? "bg-yellow-500" : "bg-white"}`}
+            className={`font-bold text-lg border p-2 rounded-md ${
+              isMovieSelected ? "bg-yellow-500" : "bg-white"
+            }`}
           >
             Movies
           </button>
           <button
             onClick={showTVShows}
-            className={`font-bold text-lg border  p-2 rounded-md ${showClicked ? "bg-yellow-500" : "bg-white"}`}
+            className={`font-bold text-lg border  p-2 rounded-md ${
+              !isMovieSelected ? "bg-yellow-500" : "bg-white"
+            }`}
           >
             Shows
           </button>
         </div>
       </div>
       <hr />
-      {movie && <PopularMovies />}
+      {isMovieSelected ? <PopularMovies /> : <PopularShows />}
 
-      {show && <PopularShows />}
     </div>
   );
 };
