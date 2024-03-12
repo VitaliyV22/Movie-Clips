@@ -2,8 +2,20 @@ import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 
 export const Movies = () => {
-  const [pageNumber, setPageNumber] = useState("1")
-  // const pageNumber = "1"
+  const [pageNumber, setPageNumber] = useState(1);
+
+  // logic for pagination
+  const pageForward = () => {
+    setPageNumber(pageNumber + 1);
+  };
+  const pageBackward = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    } else {
+      return;
+    }
+  };
+
   const { data, error, isLoading, refetch } = useDataFetch(
     `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`
   );
@@ -35,11 +47,22 @@ export const Movies = () => {
     );
   }
 
-
- 
-
   return (
     <section>
+      <div>
+        <button
+          onClick={pageBackward}
+          className="text-4x m-10 bg-yellow-500 p-2 text-2xl font-bold"
+        >
+          Back
+        </button>
+        <button
+          onClick={pageForward}
+          className="text-4x m-10 bg-yellow-500 p-2 text-2xl font-bold"
+        >
+          Next
+        </button>
+      </div>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header>
           <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
@@ -125,8 +148,6 @@ export const Movies = () => {
                       <h3 className="text-xl text-center font-bold rounded-b-xl p-2 bg-yellow-500 group-hover:underline group-hover:underline-offset-4">
                         {movie.title}
                       </h3>
-
-                     
                     </div>
                   </a>
                 </li>
