@@ -10,29 +10,29 @@ export const Header = () => {
       <div>
         <nav className=" hidden md:flex gap-5 p-5 justify-start items-center font-semibold text-lg fixed w-full border rounded-b-lg top-0 z-50 bg-white h-[4rem]">
           <div>
-            <Link className="font-bold text-2xl hover:text-red-700" to={"/"}>
+            <Link className="font-bold text-2xl bg-yellow-500 rounded-md p-2" to={"/"}>
               Movie Clips
             </Link>
           </div>
-          <div className="flex gap-5">
-            <Link to={"/movies"}>Movies</Link>
-            <Link to={"/shows"}>Tv Shows</Link>
+          <div className="flex gap-5 ">
+            <Link to={"/movies"} className="hover:bg-yellow-500 rounded-md ">Movies</Link>
+            <Link to={"/shows"} className="hover:bg-yellow-500 rounded-md ">Tv Shows</Link>
 
-            <Link to={"/favorites"}>My Favorites</Link>
-            <Link to={"/auth"}>Login</Link>
+            <Link to={"/favorites"} className="hover:bg-yellow-500 rounded-md ">My Favorites</Link>
+            <Link to={"/auth"} className="hover:bg-yellow-500 rounded-md ">Login</Link>
           </div>
         </nav>
       </div>
       <div className="mr-2 flex md:hidden">
         <button
           onClick={handleClick}
-          className="inline-flex items-center justify-center p-2 rounded-md font-bold"
+          className="inline-flex items-center justify-center p-2 text-2xl  bg-yellow-400 font-bold"
         >
           Menu
         </button>
       </div>
       <div className={(nav ? "block" : "hidden") + " md:hidden"}>
-        <div className="flex flex-col gap-3 p-2 font-semibold ">
+        <div className="flex flex-col text-lg border border-black text-black  gap-3 p-2 font-semibold ">
           <Link to={"/"}>Movie Clips</Link>
           <Link to={"/movies"}>Movies</Link>
           <Link to={"/shows"}>Tv Shows</Link>

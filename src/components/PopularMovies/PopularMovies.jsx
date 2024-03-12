@@ -57,7 +57,7 @@ export const PopularMovies = () => {
   return (
     <div>
       <div>
-        <Carousel
+        <Carousel 
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
@@ -70,7 +70,7 @@ export const PopularMovies = () => {
         >
           {data.results.map((movie) => (
             <div
-              className="flex flex-col justify-start items-center"
+              className="flex flex-col justify-start  items-center"
               key={movie.id}
             >
               <div className="mb-2">
@@ -87,7 +87,7 @@ export const PopularMovies = () => {
               <p className="font-bold relative text-black">
                 Rating : {movie.vote_average}{" "}
               </p>
-              <button className="border  bg-yellow-500 rounded-md text-sm p-1 font-bold">
+              <button className=" bg-yellow-500 rounded-md text-sm p-1 font-bold">
                 Add To Favorites
               </button>
             </div>

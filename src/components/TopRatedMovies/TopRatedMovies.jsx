@@ -33,9 +33,11 @@ export const TopRatedMovies = () => {
       <div className="text-center font-bold text-yellow-400 text-2xl">
         No data available.
       </div>
+      
     );
   }
 
+  console.log(data)
 
 
   const responsive = {
@@ -43,6 +45,7 @@ export const TopRatedMovies = () => {
       breakpoint: { max: 3000, min: 1024 },
       items: 8,
       slidesToSlide: 3, // optional, default to 1.
+      
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },

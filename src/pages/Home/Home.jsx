@@ -27,9 +27,9 @@ export const Home = () => {
   return (
     <div>
       <Banner />
-      <div className="flex flex-row justify-start items-center p-5">
-        <h1 className="font-bold  text-4xl p-5 ">Trending</h1>
-        <div className="flex ml-[10px] gap-5 items-center  ">
+      <div className="flex flex-row justify-start items-center p-2 m-5 ">
+        <h1 className= "font-bold  text-3xl ml-[20px] p-2 border rounded-lg bg-yellow-500 ">Trending</h1>
+        <div className="flex ml-[15px] gap-5 items-center  ">
           <button
             onClick={showMovies}
             className={`font-bold text-lg border p-2 rounded-md ${
@@ -48,12 +48,13 @@ export const Home = () => {
           </button>
         </div>
       </div>
-
-      {isMovieSelected ? <PopularMovies /> : <PopularShows />}
+      <div className=" p-5  m-auto rounded-lg bg-gradient-to-r from-white to-blue-200">
+        {isMovieSelected ? <PopularMovies /> : <PopularShows />}
+      </div>
 
       <div className="flex flex-row justify-start items-center p-5">
-        <h1 className="font-bold  text-4xl p-5 ">Top Rated</h1>
-        <div className="flex ml-[10px] gap-5 items-center  ">
+        <h1 className="font-bold  text-3xl ml-[20px] p-2 border rounded-lg bg-yellow-500 ">Top Rated</h1>
+        <div className="flex ml-[15px] gap-5 items-center  ">
           <button
             onClick={showRatedMoviews}
             className={`font-bold text-lg border p-2 rounded-md ${
@@ -64,7 +65,7 @@ export const Home = () => {
           </button>
           <button
             onClick={showRatedShows}
-            className={`font-bold text-lg border  p-2 rounded-md ${
+            className={`font-bold text-lg border p-2 rounded-md ${
               !isRatedMovieSelected ? "bg-yellow-500" : "bg-white"
             }`}
           >
@@ -72,7 +73,9 @@ export const Home = () => {
           </button>
         </div>
       </div>
-      {isRatedMovieSelected ? <TopRatedMovies /> : <TopRatedShows />}
+      <div className=" p-5 m-auto rounded-lg bg-gradient-to-r from-white to-blue-200">
+        {isRatedMovieSelected ? <TopRatedMovies /> : <TopRatedShows />}
+      </div>
     </div>
   );
 };
