@@ -9,6 +9,7 @@ import { Auth } from "./pages/Auth/Auth";
 import { Popular } from "./pages/Movies/Popular/Popular";
 import { TopRated } from "./pages/Movies/Top Rated/TopRated";
 import { Upcoming } from "./pages/Movies/Upcoming/Upcoming";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           
         </Routes>
+        <div>
+          <Footer />
+        </div>
       </Router>
     </>
   );

@@ -2,6 +2,8 @@ import React from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import getColor from "../../hooks/getColor";
+
 
 export const PopularShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
@@ -84,6 +86,13 @@ export const PopularShows = () => {
                   }
                   alt=""
                 />
+                <h1
+                  className={`w-7 h-7 text-center border-slate-300 border ${getColor(
+                    Math.round(show.vote_average * 10) / 10
+                  )} font-bold top-2 absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                >
+                  {Math.round(show.vote_average * 10) / 10}
+                </h1>
                  <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
                 Add To Favorites
               </button>

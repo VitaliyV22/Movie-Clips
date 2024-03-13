@@ -152,6 +152,7 @@ export const Movies = () => {
               >
                 Back
               </button>
+              <h1 className="text-4x m-10 rounded-lg px-5 bg-yellow-500 p-2 text-2xl font-bold" >{pageNumber}</h1>
               <button
                 onClick={pageForward}
                 className="text-4x m-10 rounded-lg  bg-yellow-500 p-2 text-2xl font-bold"

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import getColor from "../../hooks/getColor";
 
 export const PopularMovies = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
@@ -53,6 +54,8 @@ export const PopularMovies = () => {
     },
   };
 
+  const rating = () => {};
+
   return (
     <div>
       <div>
@@ -70,27 +73,30 @@ export const PopularMovies = () => {
         >
           {data.results.map((movie) => (
             <div
-              className="flex flex-col justify-start items-center"
+              className="flex flex-col  justify-start items-center"
               key={movie.id}
             >
-              <div className="mb-6 lg:flex flex-col">
+              <div className="mb-6  lg:flex flex-col">
                 <img
-                  className="object-fill rounded-md h-[250px] w-[155px] "
+                  className="object-fill  rounded-md h-[250px] w-[155px] "
                   src={
                     "https://image.tmdb.org/t/p/original/" + movie.poster_path
                   }
                   alt=""
                 />
-                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                Add To Favorites
-              </button>
+                <h1
+                  className={`w-7 h-7 text-center border-slate-300 border ${getColor(
+                    Math.round(movie.vote_average * 10) / 10
+                  )} font-bold top-2 absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                >
+                  {Math.round(movie.vote_average * 10) / 10}
+                </h1>
+                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
+                  Add To Favorites
+                </button>
               </div>
               <h1 className="font-bold text-center">{movie.title}</h1>
               <p>{movie.release_date}</p>
-              <p className="font-bold relative text-black mb-5">
-                Rating : {movie.vote_average}{" "}
-              </p>
-          
             </div>
           ))}
         </Carousel>

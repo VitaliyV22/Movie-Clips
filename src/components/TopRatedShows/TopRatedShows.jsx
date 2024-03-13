@@ -2,7 +2,7 @@ import React from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import getColor from "../../hooks/getColor";
 export const TopRatedShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
     "https://api.themoviedb.org/3/tv/top_rated"
@@ -80,15 +80,20 @@ export const TopRatedShows = () => {
                   }
                   alt=""
                 />
+                <h1
+                  className={`w-7 h-7 text-center border-slate-300 border ${getColor(
+                    Math.round(show.vote_average * 10) / 10
+                  )} font-bold top-2 absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                >
+                  {Math.round(show.vote_average * 10) / 10}
+                </h1>
                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
                   Add To Favorites
                 </button>
               </div>
               <h1 className="font-bold text-center">{show.name}</h1>
               <p>{show.first_air_date}</p>
-              <p className="font-bold relative mb-5 text-black">
-                Rating : {show.vote_average}{" "}
-              </p>
+             
             </div>
           ))}
         </Carousel>
