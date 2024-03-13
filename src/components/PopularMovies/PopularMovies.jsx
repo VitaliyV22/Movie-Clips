@@ -35,7 +35,6 @@ export const PopularMovies = () => {
     );
   }
 
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -57,10 +56,11 @@ export const PopularMovies = () => {
   return (
     <div>
       <div>
-        <Carousel 
+        <Carousel
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
+          showDots={true}
           keyBoardControl={true}
           customTransition="all .2"
           containerClass="carousel-container"
@@ -70,10 +70,10 @@ export const PopularMovies = () => {
         >
           {data.results.map((movie) => (
             <div
-              className="flex flex-col justify-start  items-center"
+              className="flex flex-col justify-start items-center"
               key={movie.id}
             >
-              <div className="mb-2">
+              <div className="mb-6 lg:flex flex-col">
                 <img
                   className="object-fill rounded-md h-[250px] w-[155px] "
                   src={
@@ -81,15 +81,16 @@ export const PopularMovies = () => {
                   }
                   alt=""
                 />
-              </div>
-              <h1 className="font-bold">{movie.title}</h1>
-              <p>{movie.release_date}</p>
-              <p className="font-bold relative text-black">
-                Rating : {movie.vote_average}{" "}
-              </p>
-              <button className=" bg-yellow-500 rounded-md text-sm p-1 font-bold">
+                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
                 Add To Favorites
               </button>
+              </div>
+              <h1 className="font-bold text-center">{movie.title}</h1>
+              <p>{movie.release_date}</p>
+              <p className="font-bold relative text-black mb-5">
+                Rating : {movie.vote_average}{" "}
+              </p>
+          
             </div>
           ))}
         </Carousel>

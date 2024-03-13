@@ -59,6 +59,7 @@ export const TopRatedShows = () => {
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
+          showDots={true}
           keyBoardControl={true}
           customTransition="all .2"
           containerClass="carousel-container"
@@ -66,28 +67,28 @@ export const TopRatedShows = () => {
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
-          {data.results.map((movie) => (
+          {data.results.map((show) => (
             <div
               className="flex flex-col justify-start items-center"
-              key={movie.id}
+              key={show.id}
             >
-              <div className="mb-2">
+              <div className="mb-6 lg:flex flex-col">
                 <img
                   className="object-fill rounded-md h-[250px] w-[155px] "
                   src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                    "https://image.tmdb.org/t/p/original/" + show.poster_path
                   }
                   alt=""
                 />
+                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
+                  Add To Favorites
+                </button>
               </div>
-              <h1 className="font-bold">{movie.title}</h1>
-              <p>{movie.release_date}</p>
-              <p className="font-bold relative text-black">
-                Rating : {movie.vote_average}{" "}
+              <h1 className="font-bold text-center">{show.name}</h1>
+              <p>{show.first_air_date}</p>
+              <p className="font-bold relative mb-5 text-black">
+                Rating : {show.vote_average}{" "}
               </p>
-              <button className="border  bg-yellow-500 rounded-md text-sm p-1 font-bold">
-                Add To Favorites
-              </button>
             </div>
           ))}
         </Carousel>

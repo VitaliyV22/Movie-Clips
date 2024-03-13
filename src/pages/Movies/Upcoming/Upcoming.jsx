@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import useDataFetch from "../../../hooks/useDataFetch";
 import { Link } from "react-router-dom";
 
-export const TopRated = () => {
+export const Upcoming = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  
 
   // logic for pagination
   const pageForward = () => {
@@ -17,12 +16,8 @@ export const TopRated = () => {
       return;
     }
   };
-
-
-
-
   const { data, error, isLoading, refetch } = useDataFetch(
-    `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${pageNumber}`
+    `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${pageNumber}`
   );
   if (isLoading) {
     return (
@@ -51,11 +46,10 @@ export const TopRated = () => {
       </div>
     );
   }
-
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <h1 className="text-2xl font-bold">Top Rated</h1>
+        <h1 className="text-2xl font-bold">Trending</h1>
 
         <div className="mt-8 block lg:hidden">
           <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
@@ -104,20 +98,24 @@ export const TopRated = () => {
             <div>
               <p className="block text-xs font-medium text-gray-700">Filters</p>
               <div className="lg:flex flex-col gap-3  w-40">
-                <Link to={"/movies/popular"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
+                <Link
+                  to={"/movies/popular"}
+                  className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2"
+                >
                   Popular
                 </Link>
-                <Link to={"/movies/upcoming"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
-                Upcoming
+                <Link
+                  to={"/movies/upcoming"}
+                  className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2"
+                >
+                  Upcoming
                 </Link>
-                <Link to={"/movies/top-rated"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
+                <Link
+                  to={"/movies/top-rated"}
+                  className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2"
+                >
                   Top Rated
                 </Link>
-                
-                
               </div>
             </div>
           </div>

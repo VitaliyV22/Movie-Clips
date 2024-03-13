@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
+import { Link } from "react-router-dom";
 
 export const Movies = () => {
   const [pageNumber, setPageNumber] = useState(1);
+  
 
   // logic for pagination
   const pageForward = () => {
@@ -15,6 +17,9 @@ export const Movies = () => {
       return;
     }
   };
+
+
+
 
   const { data, error, isLoading, refetch } = useDataFetch(
     `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`
@@ -49,26 +54,8 @@ export const Movies = () => {
 
   return (
     <section>
-      <div>
-        <button
-          onClick={pageBackward}
-          className="text-4x m-10 bg-yellow-500 p-2 text-2xl font-bold"
-        >
-          Back
-        </button>
-        <button
-          onClick={pageForward}
-          className="text-4x m-10 bg-yellow-500 p-2 text-2xl font-bold"
-        >
-          Next
-        </button>
-      </div>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <header>
-          <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-            Movies
-          </h2>
-        </header>
+      <h1 className="text-2xl font-bold">Now Playing</h1>
 
         <div className="mt-8 block lg:hidden">
           <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
@@ -117,15 +104,20 @@ export const Movies = () => {
             <div>
               <p className="block text-xs font-medium text-gray-700">Filters</p>
               <div className="lg:flex flex-col gap-3  w-40">
-                <button className="block font-bold text-2xl rounded-md bg-yellow-500 p-2">
+                <Link to={"/movies/popular"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
+              
                   Popular
-                </button>
-                <button className="block font-bold text-2xl rounded-md bg-yellow-500 p-2">
-                  Trending
-                </button>
-                <button className="block font-bold text-2xl rounded-md bg-yellow-500 p-2">
+                </Link>
+                <Link to={"/movies/upcoming"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
+              
+                Upcoming
+                </Link>
+                <Link to={"/movies/top-rated"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
+              
                   Top Rated
-                </button>
+                </Link>
+                
+                
               </div>
             </div>
           </div>
@@ -153,6 +145,20 @@ export const Movies = () => {
                 </li>
               ))}
             </ul>
+            <div className="flex justify-center ">
+              <button
+                onClick={pageBackward}
+                className="text-4x m-10 rounded-lg  bg-yellow-500 p-2 text-2xl font-bold"
+              >
+                Back
+              </button>
+              <button
+                onClick={pageForward}
+                className="text-4x m-10 rounded-lg  bg-yellow-500 p-2 text-2xl font-bold"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>

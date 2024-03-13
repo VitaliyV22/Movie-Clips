@@ -53,13 +53,16 @@ export const PopularShows = () => {
     },
   };
 
+  console.log(data)
+
   return (
     <div>
       <div>
-        <Carousel
+      <Carousel 
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
+          showDots={true}
           keyBoardControl={true}
           customTransition="all .2"
           containerClass="carousel-container"
@@ -72,7 +75,8 @@ export const PopularShows = () => {
               className="flex flex-col justify-start items-center"
               key={show.id}
             >
-              <div className="mb-2">
+              
+              <div className="mb-6 lg:flex flex-col">
                 <img
                   className="object-fill rounded-md h-[250px] w-[155px] "
                   src={
@@ -80,15 +84,16 @@ export const PopularShows = () => {
                   }
                   alt=""
                 />
-              </div>
-              <h1 className="font-bold">{show.title}</h1>
-              <p>{show.release_date}</p>
-              <p className="font-bold relative text-black">
-                Rating : {show.vote_average}{" "}
-              </p>
-              <button className="border  bg-yellow-500 rounded-md text-sm p-1 font-bold">
+                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
                 Add To Favorites
               </button>
+              </div>
+              <h1 className="font-bold text-center">{show.name}</h1>
+              <p>{show.first_air_date}</p>
+              <p className="font-bold relative mb-5 text-black">
+                Rating : {show.vote_average}{" "}
+              </p>
+             
             </div>
           ))}
         </Carousel>
