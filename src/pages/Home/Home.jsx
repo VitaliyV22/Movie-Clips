@@ -28,7 +28,7 @@ export const Home = () => {
     <div>
       <Banner />
       <div className="flex flex-row justify-start items-center p-2 m-5 ">
-        <h1 className= "font-bold  text-3xl ml-[20px] p-2 border rounded-lg bg-yellow-500 ">Popular</h1>
+        <h1 className= "font-bold  text-3xl ml-[20px] p-2 border rounded-lg bg-yellow-500 ">Now Playing</h1>
         <div className="flex ml-[15px] gap-5 items-center  ">
           <button
             onClick={showMovies}

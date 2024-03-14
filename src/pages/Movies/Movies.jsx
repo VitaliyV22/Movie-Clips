@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import { Link } from "react-router-dom";
+import { MoviesMenu } from "../../components/MoviesMenu/MoviesMenu";
+
 
 export const Movies = () => {
-  const [pageNumber, setPageNumber] = useState(1);
   
+  const [pageNumber, setPageNumber] = useState(1);
+ 
+  const [category, setCategory] = useState("now_playing")
 
   // logic for pagination
   const pageForward = () => {
@@ -18,11 +22,10 @@ export const Movies = () => {
     }
   };
 
-
-
+  
 
   const { data, error, isLoading, refetch } = useDataFetch(
-    `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`
+    `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=${pageNumber}`
   );
   if (isLoading) {
     return (
@@ -51,82 +54,25 @@ export const Movies = () => {
       </div>
     );
   }
-
+ 
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <h1 className="text-2xl font-bold">Now Playing</h1>
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 rounded-xl bg-gradient-to-b from-blue-100 to-blue-400 lg:px-8">
+       <MoviesMenu pageNumber={pageNumber} setPageNumber={setPageNumber} category={category} setCategory={setCategory} />
 
-        <div className="mt-8 block lg:hidden">
-          <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-            <span className="text-sm font-medium"> Filters & Sorting </span>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-4 rtl:rotate-180"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
-          <div className="hidden space-y-4 lg:block">
-            <div>
-              <label
-                htmlFor="SortBy"
-                className="block text-xs font-medium text-gray-700"
-              >
-                {" "}
-                Sort By{" "}
-              </label>
-
-              <select
-                id="SortBy"
-                className="mt-1 rounded border-gray-300 text-sm"
-              >
-                <option>Sort By</option>
-                <option value="Title, DESC">Title, DESC</option>
-                <option value="Title, ASC">Title, ASC</option>
-                <option value="Price, DESC">Price, DESC</option>
-                <option value="Price, ASC">Price, ASC</option>
-              </select>
-            </div>
-
-            <div>
-              <p className="block text-xs font-medium text-gray-700">Filters</p>
-              <div className="lg:flex flex-col gap-3  w-40">
-                <Link to={"/movies/popular"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
-                  Popular
-                </Link>
-                <Link to={"/movies/upcoming"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
-                Upcoming
-                </Link>
-                <Link to={"/movies/top-rated"} className="block font-bold text-2xl text-center rounded-md bg-yellow-500 p-2">
-              
-                  Top Rated
-                </Link>
-                
-                
-              </div>
-            </div>
-          </div>
-
+        {/* mobile */}
+        <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-3 lg:items-end lg:gap-8">
           <div className="lg:col-span-3">
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((movie) => (
                 <li key={movie.id}>
-                  <a href="#" className="group block overflow-hidden">
+                  <h3 className="text-md text-center font-bold rounded-t-xl p-2 text-nowrap bg-slate-200 group-hover:underline group-hover:underline-offset-4">
+                    {movie.title}
+                  </h3>
+                  <a
+                    href="#"
+                    className="group block rounded-md overflow-hidden"
+                  >
                     <img
                       src={
                         "https://image.tmdb.org/t/p/original/" +
@@ -136,26 +82,27 @@ export const Movies = () => {
                       className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[350px]"
                     />
 
-                    <div className="relative bg-white ">
-                      <h3 className="text-xl text-center font-bold rounded-b-xl p-2 bg-yellow-500 group-hover:underline group-hover:underline-offset-4">
-                        {movie.title}
-                      </h3>
-                    </div>
+                    <button className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold">
+                      Add To Favorites
+                    </button>
                   </a>
                 </li>
               ))}
             </ul>
-            <div className="flex justify-center ">
+            <hr className="m-10 " />
+            <div className="flex justify-center text-lg items-center">
               <button
                 onClick={pageBackward}
-                className="text-4x m-10 rounded-lg  bg-yellow-500 p-2 text-2xl font-bold"
+                className=" m-10 rounded-lg  bg-yellow-500 p-2  font-bold"
               >
                 Back
               </button>
-              <h1 className="text-4x m-10 rounded-lg px-5 bg-yellow-500 p-2 text-2xl font-bold" >{pageNumber}</h1>
+              <h1 className=" m-10 rounded-lg px-5 bg-yellow-500 p-2  font-bold">
+                {pageNumber}
+              </h1>
               <button
                 onClick={pageForward}
-                className="text-4x m-10 rounded-lg  bg-yellow-500 p-2 text-2xl font-bold"
+                className=" m-10 rounded-lg  bg-yellow-500 p-2  font-bold"
               >
                 Next
               </button>

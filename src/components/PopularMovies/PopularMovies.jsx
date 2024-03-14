@@ -6,7 +6,7 @@ import getColor from "../../hooks/getColor";
 
 export const PopularMovies = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page"
   );
   if (isLoading) {
     return (
