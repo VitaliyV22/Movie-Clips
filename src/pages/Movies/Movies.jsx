@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import { Link } from "react-router-dom";
 import { MoviesMenu } from "../../components/MoviesMenu/MoviesMenu";
-
+import getColor from "../../hooks/getColor";
 
 export const Movies = () => {
-  
   const [pageNumber, setPageNumber] = useState(1);
- 
-  const [category, setCategory] = useState("now_playing")
+
+  const [category, setCategory] = useState("now_playing");
 
   // logic for pagination
   const pageForward = () => {
@@ -21,8 +20,6 @@ export const Movies = () => {
       return;
     }
   };
-
-  
 
   const { data, error, isLoading, refetch } = useDataFetch(
     `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=${pageNumber}`
@@ -54,11 +51,16 @@ export const Movies = () => {
       </div>
     );
   }
- 
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 rounded-xl bg-gradient-to-b from-blue-100 to-blue-400 lg:px-8">
-       <MoviesMenu pageNumber={pageNumber} setPageNumber={setPageNumber} category={category} setCategory={setCategory} />
+        <MoviesMenu
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          category={category}
+          setCategory={setCategory}
+        />
 
         {/* mobile */}
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-3 lg:items-end lg:gap-8">
@@ -66,9 +68,17 @@ export const Movies = () => {
             <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((movie) => (
                 <li key={movie.id}>
+                  
                   <h3 className="text-md text-center font-bold rounded-t-xl p-2 text-nowrap bg-slate-200 group-hover:underline group-hover:underline-offset-4">
                     {movie.title}
                   </h3>
+                  <h1
+                      className={`w-7 h-7 text-center border-slate-300 border ${getColor(
+                        Math.round(movie.vote_average * 10) / 10
+                      )} font-bold text-center absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                    >
+                      {Math.round(movie.vote_average * 10) / 10}
+                    </h1>
                   <a
                     href="#"
                     className="group block rounded-md overflow-hidden"
@@ -79,9 +89,9 @@ export const Movies = () => {
                         movie.poster_path
                       }
                       alt=""
-                      className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[350px]"
+                      className="h-[350px] w-full object-cover sm:h-[350px]"
                     />
-
+                   
                     <button className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold">
                       Add To Favorites
                     </button>
