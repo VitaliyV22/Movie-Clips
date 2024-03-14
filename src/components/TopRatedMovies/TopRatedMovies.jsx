@@ -86,7 +86,7 @@ export const TopRatedMovies = () => {
                 <h1
                   className={`w-7 h-7 text-center border-slate-300 border ${getColor(
                     Math.round(movie.vote_average * 10) / 10
-                  )} font-bold top-2 absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                  )} font-bold top-2 absolute  text-slate-800 rounded-3xl text-lg`}
                 >
                   {Math.round(movie.vote_average * 10) / 10}
                 </h1>

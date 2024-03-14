@@ -67,13 +67,13 @@ export const Shows = () => {
             <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((show) => (
                 <li key={show.id}>
-                  <h3 className="text-md text-center font-bold rounded-t-xl p-2 text-nowrap bg-slate-200 group-hover:underline group-hover:underline-offset-4">
+                  <h3 className="text-md lg:text-sm lg:truncate text-center font-bold rounded-t-xl  bg-slate-200 p-3 group-hover:underline group-hover:underline-offset-4">
                     {show.name}
                   </h3>
                   <h1
                       className={`w-7 h-7 text-center border-slate-300 border ${getColor(
                         Math.round(show.vote_average * 10) / 10
-                      )} font-bold text-center absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
+                      )} font-bold text-center absolute  text-slate-800 rounded-3xl text-lg`}
                     >
                       {Math.round(show.vote_average * 10) / 10}
                     </h1>
@@ -87,7 +87,7 @@ export const Shows = () => {
                         show.poster_path
                       }
                       alt=""
-                      className="h-[350px] w-full object-cover  sm:h-[350px]"
+                      className="h-[350px] w-full object-cover  sm:h-[355px]"
                     />
 
                     <button className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold">

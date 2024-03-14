@@ -5,6 +5,8 @@ const getColor = (voteAverage) => {
   else {
     return "bg-pink-700";
   }
-};
+  
+  
+}
 
-export default getColor;
+export default getColor
