@@ -12,6 +12,7 @@ import { MovieDetails } from "./components/MovieDetails/MovieDetails";
 
 
 
+
 function App() {
   return (
     <>

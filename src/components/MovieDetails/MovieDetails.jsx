@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useDataFetch from "../../hooks/useDataFetch";
+import { MovieCredits } from "../MovieCredits/MovieCredits";
+import { MovieTrailer } from "../MovieTrailer/MovieTrailer";
+import { MovieRecom } from "../MovieRecom/MovieRecom";
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -40,9 +43,9 @@ export const MovieDetails = () => {
   }
   const backDropUrl = "https://image.tmdb.org/t/p/original";
   let bannerImage = backDropUrl + results.backdrop_path;
-  console.log(results)
+
   return (
-    <div>
+    <div className="bg-gradient-to-b from-white via-blue-100 to-blue-400">
       <div className="relative">
         <div
           className="absolute inset-0 z-0 blur-sm   bg-center bg-cover"
@@ -51,7 +54,7 @@ export const MovieDetails = () => {
         {/* Black Overlay */}
         <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
-        <div className="relative z-10 p-[20px]">
+        <div className="relative z-10 p-[20px] ">
           <div className="lg:flex justify-center">
             <section className="lg:flex h-[450px] w-[1320px]">
               <div className="">
@@ -96,6 +99,32 @@ export const MovieDetails = () => {
             </section>
           </div>
         </div>
+      </div>
+      <div>
+        <MovieCredits movieId={id} />
+      </div>
+      <hr className="text-slate-900" />
+      <div className="flex justify-evenly p-12">
+        <div>
+          <MovieTrailer movieId={id} />
+        </div>
+        <div className=" border flex w-[20rem] justify-center items-center border-red-500">
+          <ul className="*:rounded-full ">
+            <h1>Status</h1>
+            <li>{results.status}</li>
+            <h1>Budget</h1>
+            <li>{results.budget}</li>
+            <h1>Revenue</h1>
+            <li>{results.revenue}</li>
+            <h1>Original Language</h1>
+            <li>{results.original_language}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        {" "}
+        <MovieRecom />{" "}
       </div>
     </div>
   );
