@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className="pb-10">
+        <div className="pb-[4rem]">
           <Header />
         </div>
 
@@ -29,9 +29,9 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           
         </Routes>
-        <div>
+        {/* <div className="">
           <Footer />
-        </div>
+        </div> */}
       </Router>
     </>
   );
