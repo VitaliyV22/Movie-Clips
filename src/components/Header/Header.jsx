@@ -23,10 +23,10 @@ export const Header = () => {
           </div>
         </nav>
       </div>
-      <div className="mr-2 flex md:hidden">
+      <div className=" flex md:hidden">
         <button
           onClick={handleClick}
-          className="inline-flex items-center justify-center p-2 text-2xl  bg-yellow-400 font-bold"
+          className="flex items-center justify-center p-2 text-2xl w-full bg-yellow-400 font-bold"
         >
           Menu
         </button>

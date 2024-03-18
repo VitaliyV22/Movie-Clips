@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className="pb-[4rem]">
+        <div className="lg:pb-[4rem]">
           <Header />
         </div>
 

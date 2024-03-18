@@ -41,10 +41,10 @@ export const ShowDetails = () => {
     );
   }
 
-  console.log(results);
-
   const backDropUrl = "https://image.tmdb.org/t/p/original";
   let bannerImage = backDropUrl + results.backdrop_path;
+
+
 
   return (
     <div className="bg-gradient-to-b from-white via-blue-100 to-blue-400">
@@ -56,21 +56,32 @@ export const ShowDetails = () => {
         {/* Black Overlay */}
         <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
-        <div className="relative z-10 p-4 lg:p-8">
+        <div className="relative z-10 p-[20px] ">
           <div className="lg:flex justify-center">
-            <section className="lg:flex w-full lg:w-1320px">
-              <div className="w-full lg:w-auto lg:mr-4">
-                <img
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + results.poster_path
-                  }
-                  alt=""
-                  className="object-cover h-64 lg:h-auto w-full rounded-md"
-                />
+            <section className="lg:flex  ">
+              <div className=" ">
+                {results.poster_path ? (
+                  <img
+                    src={
+                      "https://image.tmdb.org/t/p/original/" +
+                      results.poster_path
+                    }
+                    alt=""
+                    className="object-cover h-[500px] w-[450px] block rounded-md"
+                  />
+                ) : (
+                  <img
+                    src={
+                      "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                    }
+                    alt=""
+                    className="object-cover h-[450px] width-[300px] block rounded-md"
+                  />
+                )}
               </div>
 
-              <div className="lg:flex w-full lg:w-auto h-auto text-white box-border">
-                <section className="lg:flex flex-col justify-center gap-4 content-center w-full p-4 lg:p-10">
+              <div className="lg:flex  h-auto text-white box-border">
+                <section className="lg:flex  flex-col  p-4">
                   <div>
                     <div className="lg:flex items-center gap-2">
                       <h1 className="font-bold text-yellow-500 text-2xl lg:text-4xl">
@@ -95,18 +106,18 @@ export const ShowDetails = () => {
                       <h1> {results.vote_average}</h1>
                     </div>
                   </div>
-                  <div className="lg:flex w-full">
+                  <div className="lg:flex mt-2 ">
                     <p className="text-wrap">{results.overview}</p>
                   </div>
                   <div className="lg:flex items-center flex-wrap">
                     <ul>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md  py-1 font-bold">
                         Status
                       </h1>
                       <li className="text-md font-semibold">
                         {results.status}
                       </li>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md py-1 font-bold">
                         Network
                       </h1>
                       <li className="text-md font-semibold">
@@ -114,13 +125,17 @@ export const ShowDetails = () => {
                           <p key={network.id}>{network.name}</p>
                         ))}
                       </li>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md  py-1 font-bold">
                         Created By
                       </h1>
                       <li className="text-md font-semibold">
-                        {results.created_by.map((creator) => (
-                          <p key={creator.id}>{creator.name}</p>
-                        ))}
+                        {results.created_by.length > 0 ? (
+                          results.created_by.map((creator) => (
+                            <p key={creator.id}>{creator.name}</p>
+                          ))
+                        ) : (
+                          <p>N/A</p>
+                        )}
                       </li>
                       <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
                         Original Language
@@ -142,7 +157,7 @@ export const ShowDetails = () => {
       <hr className="text-slate-900" />
       <div className=" p-10 lg:flex justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
-        Trailer
+          Trailer
         </h1>
       </div>
       <div className="flex justify-evenly p-12">
@@ -153,7 +168,7 @@ export const ShowDetails = () => {
       <div></div>
       <div className=" p-10 lg:flex justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
-        Recommendations
+          Recommendations
         </h1>
       </div>
       <div>

@@ -39,8 +39,7 @@ export const MovieTrailer = (props) => {
   }
 
   const opts = {
-    height: "390",
-    width: "640",
+   
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
@@ -51,16 +50,19 @@ export const MovieTrailer = (props) => {
     const trailer = results.results.find(
       (vid) => vid.name === "Official Trailer" || "Trailer"
     );
-
-    //    using the react-youtube package and running the trailer key in videoId
-    return <YouTube videoId={trailer.key} opts={opts} />;
-  };
+    if (!results.results[0]) {
+      return <div className="font-bold text-2xl bg-yellow-500 rounded-md p-5">Sorry, this show does not have a trailer</div>;
+    } else {
+      return <YouTube videoId={trailer.key} opts={opts} />;
+      //    using the react-youtube package and running the trailer key in videoId
+    }
+  }
 
   return (
     <div>
       <div className="">
-        <div className="  flex justify-center items-center">
-          <div> {renderTrailer()}</div>
+        <div className=" flex max-w-[10px] justify-center  items-center">
+          <div className=""> {renderTrailer()}</div>
         </div>
       </div>
     </div>

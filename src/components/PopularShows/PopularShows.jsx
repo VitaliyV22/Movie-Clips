@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export const PopularShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/tv/airing_today"
+    "https://api.themoviedb.org/3/discover/tv?include_language=en-US"
   );
   if (isLoading) {
     return (

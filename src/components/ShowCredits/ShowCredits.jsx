@@ -74,19 +74,26 @@ export const ShowCredits = (props) => {
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
-          {results.cast.slice(0, 15).map((cast) => (
+          {results.cast.length > 0 ? ( results.cast.slice(0, 15).map((cast) => (
             <div
               className="flex flex-col justify-start items-center"
               key={cast.id}
             >
               <div className="mb-5 lg:flex flex-col">
-                <img
+                {cast.profile_path ? (<img
                   className="object-fill rounded-md h-[180px] w-[120px] "
                   src={
                     "https://image.tmdb.org/t/p/original/" + cast.profile_path
                   }
                   alt=""
-                />
+                />) : (<img
+                  src={
+                    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                  }
+                  alt=""
+                  className="object-fill rounded-md h-[180px] w-[120px]"
+                />)}
+                
               </div>
               <h1 className="font-bold text-md text-center">{cast.name}</h1>
               <h1 className=" italic text-sm text-center">
@@ -94,7 +101,8 @@ export const ShowCredits = (props) => {
               </h1>
               <p>{cast.release_date}</p>
             </div>
-          ))}
+          ))) : (<p className="font-bold text-center">N/A</p>)}
+         
         </Carousel>
       </div>
     </div>

@@ -37,7 +37,7 @@ export const PopularMovies = () => {
     );
   }
 
-  console.log(data);
+ 
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },

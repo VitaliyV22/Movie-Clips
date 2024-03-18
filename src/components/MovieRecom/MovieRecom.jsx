@@ -13,7 +13,7 @@ export const MovieRecom = () => {
     error,
     isLoading,
     refetch,
-  } = useDataFetch(`https://api.themoviedb.org/3/movie/${id}/recommendations`);
+  } = useDataFetch(`https://api.themoviedb.org/3/movie/${id}/similar`);
   if (isLoading) {
     return (
       <div className="text-center font-bold text-yellow-400 text-2xl">
@@ -61,7 +61,7 @@ export const MovieRecom = () => {
   };
   return (
     <div>
-      <div className="p-10">
+      <div >
         <Carousel
           draggable={false}
           responsive={responsive}
@@ -80,14 +80,25 @@ export const MovieRecom = () => {
               key={result.id}
             >
               <div className="mb-6  lg:flex flex-col">
-              <Link to={`/movies/${result.id}`}>
-                  <img
-                    className="object-fill rounded-md h-[250px] w-[155px] "
-                    src={
-                      "https://image.tmdb.org/t/p/original/" + result.poster_path
-                    }
-                    alt=""
-                  />
+                <Link to={`/movies/${result.id}`}>
+                  {result.poster_path ? (
+                    <img
+                      src={
+                        "https://image.tmdb.org/t/p/original/" +
+                        result.poster_path
+                      }
+                      alt=""
+                      className="object-fill rounded-t-md h-[250px] w-[155px]"
+                    />
+                  ) : (
+                    <img
+                      src={
+                        "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                      }
+                      alt=""
+                      className="object-fill rounded-t-md h-[250px] w-[155px]"
+                    />
+                  )}
                 </Link>
                 <h1
                   className={`w-7 h-7 text-center border-slate-300 border ${getColor(
@@ -96,12 +107,14 @@ export const MovieRecom = () => {
                 >
                   {Math.round(result.vote_average * 10) / 10}
                 </h1>
-                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
+                <button className=" bg-yellow-500 text-center w-full rounded-b-md text-sm p-1 font-bold">
                   Add To Favorites
                 </button>
               </div>
               <Link to={`/movies/${result.id}`}>
-                <h1  className="font-bold hover:bg-yellow-500 rounded-md p-2 text-center">{result.title}</h1>
+                <h1 className="font-bold hover:bg-yellow-500 rounded-md p-2 text-center">
+                  {result.title}
+                </h1>
               </Link>
 
               <p>{result.release_date}</p>
