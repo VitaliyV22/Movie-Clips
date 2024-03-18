@@ -3,7 +3,7 @@ import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import getColor from "../../hooks/getColor";
-
+import { Link } from "react-router-dom";
 export const TopRatedMovies = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
     "https://api.themoviedb.org/3/movie/top_rated"
@@ -36,8 +36,6 @@ export const TopRatedMovies = () => {
     );
   }
 
-  
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -58,7 +56,7 @@ export const TopRatedMovies = () => {
   return (
     <div>
       <div>
-      <Carousel
+        <Carousel
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
@@ -76,13 +74,16 @@ export const TopRatedMovies = () => {
               key={movie.id}
             >
               <div className="mb-6 lg:flex flex-col">
-                <img
-                  className="object-fill rounded-md h-[250px] w-[155px] "
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
-                  }
-                  alt=""
-                />
+                <Link to={`/movies/${movie.id}`}>
+                  <img
+                    className="object-fill rounded-md h-[250px] w-[155px] "
+                    src={
+                      "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                    }
+                    alt=""
+                  />
+                </Link>
+
                 <h1
                   className={`w-7 h-7 text-center border-slate-300 border ${getColor(
                     Math.round(movie.vote_average * 10) / 10
@@ -90,16 +91,20 @@ export const TopRatedMovies = () => {
                 >
                   {Math.round(movie.vote_average * 10) / 10}
                 </h1>
-                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                Add To Favorites
-              </button>
+                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
+                  Add To Favorites
+                </button>
               </div>
-              <h1 className="font-bold text-center">{movie.title}</h1>
+              <Link to={`/movies/${movie.id}`}>
+                <h1 className="font-bold hover:bg-yellow-500 rounded-md p-2 text-center">
+                  {movie.title}
+                </h1>
+              </Link>
+
               <p>{movie.release_date}</p>
               <p className="font-bold relative mb-5 text-black">
                 Rating : {movie.vote_average}{" "}
               </p>
-          
             </div>
           ))}
         </Carousel>

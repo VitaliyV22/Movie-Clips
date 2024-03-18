@@ -30,9 +30,9 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           
         </Routes>
-        {/* <div className="">
+        <div className="">
           <Footer />
-        </div> */}
+        </div>
       </Router>
     </>
   );

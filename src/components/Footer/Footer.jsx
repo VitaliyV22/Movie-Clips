@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 export const Footer = () => {
   return (
     
@@ -9,9 +9,12 @@ export const Footer = () => {
   
 
     <div
-      className=" rounded-t-xl sm:flex sm:items-center h-20 bg-gradient-to-r from-white to-blue-500 sm:justify-between lg:mt-12 "
+      className=" sm:flex sm:items-center h-40 bg-yellow-500 sm:justify-between  p-5 w-full  "
     >
       <ul className="flex flex-wrap p-2 text-black items-center justify-center gap-4 text-xs lg:justify-end">
+      <Link className="font-bold text-2xl bg-yellow-500 rounded-md p-2" to={"/"}>
+              Movie Clips
+            </Link>
         <li>
           <a href="#" className=" transition hover:opacity-75"> Terms & Conditions </a>
         </li>

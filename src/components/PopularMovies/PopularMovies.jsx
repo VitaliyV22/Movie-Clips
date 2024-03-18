@@ -3,6 +3,7 @@ import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import getColor from "../../hooks/getColor";
+import { Link } from "react-router-dom";
 
 export const PopularMovies = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
@@ -36,8 +37,7 @@ export const PopularMovies = () => {
     );
   }
 
-  console.log(data)
-
+  console.log(data);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -55,8 +55,6 @@ export const PopularMovies = () => {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-
-
 
   return (
     <div>
@@ -79,13 +77,16 @@ export const PopularMovies = () => {
               key={movie.id}
             >
               <div className="mb-6  lg:flex flex-col">
-                <img
-                  className="object-fill  rounded-md h-[250px] w-[155px] "
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
-                  }
-                  alt=""
-                />
+                <Link to={`/movies/${movie.id}`}>
+                  <img
+                    className="object-fill  rounded-md h-[250px] w-[155px] "
+                    src={
+                      "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                    }
+                    alt=""
+                  />
+                </Link>
+
                 <h1
                   className={`w-7 h-7 text-center border-slate-300 border ${getColor(
                     Math.round(movie.vote_average * 10) / 10
@@ -97,7 +98,12 @@ export const PopularMovies = () => {
                   Add To Favorites
                 </button>
               </div>
-              <h1 className="font-bold text-center">{movie.title}</h1>
+              <Link to={`/movies/${movie.id}`}>
+                <h1 className="font-bold hover:bg-yellow-500 rounded-md p-2 text-center">
+                  {movie.title}
+                </h1>
+              </Link>
+
               <p>{movie.release_date}</p>
             </div>
           ))}

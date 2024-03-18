@@ -49,17 +49,17 @@ export const MovieTrailer = (props) => {
 
   const renderTrailer = () => {
     const trailer = results.results.find(
-      (vid) => vid.name === "Official Trailer"
+      (vid) => vid.name === "Official Trailer" || "Trailer"
     );
+
     //    using the react-youtube package and running the trailer key in videoId
     return <YouTube videoId={trailer.key} opts={opts} />;
   };
 
   return (
     <div>
-    
       <div className="">
-        <div className=" h-[30rem] flex justify-center items-center">
+        <div className="  flex justify-center items-center">
           <div> {renderTrailer()}</div>
         </div>
       </div>

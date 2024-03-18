@@ -56,7 +56,7 @@ export const MovieDetails = () => {
 
         <div className="relative z-10 p-[20px] ">
           <div className="lg:flex justify-center">
-            <section className="lg:flex h-[450px] w-[1320px]">
+            <section className="lg:flex  w-[1320px]">
               <div className="">
                 <img
                   src={
@@ -67,7 +67,7 @@ export const MovieDetails = () => {
                 />
               </div>
 
-              <div className="lg:flex w-[1020px] h-[450px]  text-white box-border ">
+              <div className="lg:flex w-[1020px] h-auto  text-white box-border ">
                 <section className="lg:flex box-border p-10 gap-4 flex-wrap  content-center ">
                   <div>
                     <div className="lg:flex items-center gap-2">
@@ -94,6 +94,35 @@ export const MovieDetails = () => {
                   <div className="lg:flex">
                     <p className="text-wrap">{results.overview}</p>
                   </div>
+                  <div className="  flex  justify-center items-center">
+                    <ul className=" ">
+                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Status
+                      </h1>
+                      <li className="text-md font-semibold">
+                        {results.status}
+                      </li>
+                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Budget
+                      </h1>
+                      <li className="font-semibold text-md">
+                        {" "}
+                        ${results.budget.toLocaleString()}
+                      </li>
+                      <h1 className="text-2xl  text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Revenue
+                      </h1>
+                      <li className="font-semibold text-md">
+                        ${results.revenue}
+                      </li>
+                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Original Language
+                      </h1>
+                      <li className="font-semibold uppercase text-md">
+                        {results.original_language}
+                      </li>
+                    </ul>
+                  </div>
                 </section>
               </div>
             </section>
@@ -104,26 +133,23 @@ export const MovieDetails = () => {
         <MovieCredits movieId={id} />
       </div>
       <hr className="text-slate-900" />
+      <div className=" p-10 lg:flex justify-start">
+        <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
+        Trailer
+        </h1>
+      </div>
       <div className="flex justify-evenly p-12">
         <div>
           <MovieTrailer movieId={id} />
         </div>
-        <div className=" border flex w-[20rem] justify-center items-center border-red-500">
-          <ul className="*:rounded-full ">
-            <h1>Status</h1>
-            <li>{results.status}</li>
-            <h1>Budget</h1>
-            <li>{results.budget}</li>
-            <h1>Revenue</h1>
-            <li>{results.revenue}</li>
-            <h1>Original Language</h1>
-            <li>{results.original_language}</li>
-          </ul>
-        </div>
       </div>
-
+      <div></div>
+      <div className=" p-10 lg:flex justify-start">
+        <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
+        Recommendations
+        </h1>
+      </div>
       <div>
-        {" "}
         <MovieRecom />{" "}
       </div>
     </div>
