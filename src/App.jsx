@@ -8,6 +8,7 @@ import { Favorites } from "./pages/Favorites/Favorites";
 import { Auth } from "./pages/Auth/Auth";
 import { Footer } from "./components/Footer/Footer";
 import { MovieDetails } from "./components/MovieDetails/MovieDetails";
+import { ShowDetails } from "./components/ShowDetails/ShowDetails";
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
           <Route path="/shows" element={<Shows />} />
+          <Route path="/shows/:id" element={<ShowDetails />} />
           <Route path="/favorites" element={<Favorites />} />
           
         </Routes>

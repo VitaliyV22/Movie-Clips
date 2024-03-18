@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import useDataFetch from "../../hooks/useDataFetch";
-import { MovieCredits } from "../MovieCredits/MovieCredits";
-import { MovieTrailer } from "../MovieTrailer/MovieTrailer";
-import { MovieRecom } from "../MovieRecom/MovieRecom";
+import { ShowCredits } from "../ShowCredits/ShowCredits";
+import { ShowTrailer } from "../ShowTrailer/ShowTrailer";
+import { ShowRecom } from "../ShowRecom/ShowRecom";
 
-export const MovieDetails = () => {
+export const ShowDetails = () => {
   const { id } = useParams();
-
   const {
     data: results,
     error,
     isLoading,
     refetch,
-  } = useDataFetch(`https://api.themoviedb.org/3/movie/${id}`);
+  } = useDataFetch(`https://api.themoviedb.org/3/tv/${id}`);
   if (isLoading) {
     return (
       <div className="text-center font-bold text-yellow-400 text-2xl">
@@ -40,10 +39,10 @@ export const MovieDetails = () => {
         No data available.
       </div>
     );
-
   }
 
-  
+  console.log(results);
+
   const backDropUrl = "https://image.tmdb.org/t/p/original";
   let bannerImage = backDropUrl + results.backdrop_path;
 
@@ -51,33 +50,35 @@ export const MovieDetails = () => {
     <div className="bg-gradient-to-b from-white via-blue-100 to-blue-400">
       <div className="relative">
         <div
-          className="absolute inset-0 z-0 blur-sm   bg-center bg-cover"
+          className="absolute inset-0 z-0 blur-sm bg-center bg-cover"
           style={{ backgroundImage: `url(${bannerImage})` }}
         ></div>
         {/* Black Overlay */}
         <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
-        <div className="relative z-10 p-[20px] ">
+        <div className="relative z-10 p-4 lg:p-8">
           <div className="lg:flex justify-center">
-            <section className="lg:flex  w-[1320px]">
-              <div className="">
+            <section className="lg:flex w-full lg:w-1320px">
+              <div className="w-full lg:w-auto lg:mr-4">
                 <img
                   src={
                     "https://image.tmdb.org/t/p/original/" + results.poster_path
                   }
                   alt=""
-                  className="object-cover h-[450px] width-[300px] block rounded-md"
+                  className="object-cover h-64 lg:h-auto w-full rounded-md"
                 />
               </div>
 
-              <div className="lg:flex w-[1020px] h-auto  text-white box-border ">
-                <section className="lg:flex box-border p-10 gap-4 flex-wrap  content-center ">
+              <div className="lg:flex w-full lg:w-auto h-auto text-white box-border">
+                <section className="lg:flex flex-col justify-center gap-4 content-center w-full p-4 lg:p-10">
                   <div>
                     <div className="lg:flex items-center gap-2">
-                      <h1 className="font-bold text-yellow-500 text-[40px] ">
-                        {results.title}
+                      <h1 className="font-bold text-yellow-500 text-2xl lg:text-4xl">
+                        {results.name}
                       </h1>
-                      <p className="text-[30px]">({results.release_date})</p>
+                      <p className="text-lg lg:text-2xl">
+                        ({results.first_air_date})
+                      </p>
                     </div>
 
                     <div className="ml-5">
@@ -86,39 +87,42 @@ export const MovieDetails = () => {
                           <li key={genre.id}>{genre.name}</li>
                         ))}
 
-                        <li>{results.runtime} m</li>
+                        <li>Seasons : {results.number_of_seasons} </li>
                       </ul>
                     </div>
                     <div className="lg:flex items-center mt-5 gap-2">
-                      <h1 className="font-bold  text-lg">Rating :</h1>
+                      <h1 className="font-bold text-lg lg:text-xl">Rating :</h1>
                       <h1> {results.vote_average}</h1>
                     </div>
                   </div>
-                  <div className="lg:flex">
+                  <div className="lg:flex w-full">
                     <p className="text-wrap">{results.overview}</p>
                   </div>
-                  <div className="  flex  justify-center items-center">
-                    <ul className=" ">
-                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                  <div className="lg:flex items-center flex-wrap">
+                    <ul>
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
                         Status
                       </h1>
                       <li className="text-md font-semibold">
                         {results.status}
                       </li>
-                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
-                        Budget
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Network
                       </h1>
-                      <li className="font-semibold text-md">
-                        {" "}
-                        ${results.budget.toLocaleString()}
+                      <li className="text-md font-semibold">
+                        {results.networks.map((network) => (
+                          <p key={network.id}>{network.name}</p>
+                        ))}
                       </li>
-                      <h1 className="text-2xl  text-yellow-400 rounded-md px-1 py-1 font-bold">
-                        Revenue
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                        Created By
                       </h1>
-                      <li className="font-semibold text-md">
-                        ${results.revenue.toLocaleString()}
+                      <li className="text-md font-semibold">
+                        {results.created_by.map((creator) => (
+                          <p key={creator.id}>{creator.name}</p>
+                        ))}
                       </li>
-                      <h1 className="text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
                         Original Language
                       </h1>
                       <li className="font-semibold uppercase text-md">
@@ -133,7 +137,7 @@ export const MovieDetails = () => {
         </div>
       </div>
       <div>
-        <MovieCredits movieId={id} />
+        <ShowCredits showId={id} />
       </div>
       <hr className="text-slate-900" />
       <div className=" p-10 lg:flex justify-start">
@@ -143,7 +147,7 @@ export const MovieDetails = () => {
       </div>
       <div className="flex justify-evenly p-12">
         <div>
-          <MovieTrailer movieId={id} />
+          <ShowTrailer showId={id} />
         </div>
       </div>
       <div></div>
@@ -153,7 +157,7 @@ export const MovieDetails = () => {
         </h1>
       </div>
       <div>
-        <MovieRecom />{" "}
+        <ShowRecom />{" "}
       </div>
     </div>
   );

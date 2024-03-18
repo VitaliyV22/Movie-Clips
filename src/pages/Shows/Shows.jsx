@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import getColor from "../../hooks/getColor";
 import { ShowsMenu } from "../../components/ShowsMenu/ShowsMenu";
-
+import { Link } from "react-router-dom";
 export const Shows = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -67,28 +67,34 @@ export const Shows = () => {
             <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((show) => (
                 <li key={show.id}>
-                  <h3 className="text-md lg:text-sm lg:truncate text-center font-bold rounded-t-xl  bg-slate-200 p-3 group-hover:underline group-hover:underline-offset-4">
-                    {show.name}
-                  </h3>
+                  <Link to={`/shows/${show.id}`}>
+                    <h3 className="text-md lg:text-sm lg:truncate text-center font-bold rounded-t-xl  bg-slate-200 p-3 group-hover:underline group-hover:underline-offset-4">
+                      {show.name}
+                    </h3>
+                  </Link>
+
                   <h1
-                      className={`w-7 h-7 text-center border-slate-300 border ${getColor(
-                        Math.round(show.vote_average * 10) / 10
-                      )} font-bold text-center absolute  text-slate-800 rounded-3xl text-lg`}
-                    >
-                      {Math.round(show.vote_average * 10) / 10}
-                    </h1>
+                    className={`w-7 h-7 text-center border-slate-300 border ${getColor(
+                      Math.round(show.vote_average * 10) / 10
+                    )} font-bold text-center absolute  text-slate-800 rounded-3xl text-lg`}
+                  >
+                    {Math.round(show.vote_average * 10) / 10}
+                  </h1>
                   <a
                     href="#"
                     className="group block rounded-md overflow-hidden"
                   >
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/original/" +
-                        show.poster_path
-                      }
-                      alt=""
-                      className="h-[350px] w-full object-cover  sm:h-[355px]"
-                    />
+                    <Link to={`/shows/${show.id}`}>
+                      {" "}
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/original/" +
+                          show.poster_path
+                        }
+                        alt=""
+                        className="h-[350px] w-full object-cover  sm:h-[355px]"
+                      />
+                    </Link>
 
                     <button className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold">
                       Add To Favorites

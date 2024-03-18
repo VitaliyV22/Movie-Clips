@@ -3,7 +3,7 @@ import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import getColor from "../../hooks/getColor";
-
+import { Link } from "react-router-dom";
 
 export const PopularShows = () => {
   const { data, error, isLoading, refetch } = useDataFetch(
@@ -55,12 +55,12 @@ export const PopularShows = () => {
     },
   };
 
-  console.log(data)
+  console.log(data);
 
   return (
     <div>
       <div>
-      <Carousel 
+        <Carousel
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
@@ -77,15 +77,17 @@ export const PopularShows = () => {
               className="flex flex-col justify-start items-center"
               key={show.id}
             >
-              
               <div className="mb-6 lg:flex flex-col">
-                <img
-                  className="object-fill rounded-md h-[250px] w-[155px] "
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + show.poster_path
-                  }
-                  alt=""
-                />
+                <Link to={`/shows/${show.id}`}>
+                  <img
+                    className="object-fill rounded-md h-[250px] w-[155px] "
+                    src={
+                      "https://image.tmdb.org/t/p/original/" + show.poster_path
+                    }
+                    alt=""
+                  />
+                </Link>
+
                 <h1
                   className={`w-7 h-7 text-center border-slate-300 border ${getColor(
                     Math.round(show.vote_average * 10) / 10
@@ -93,16 +95,18 @@ export const PopularShows = () => {
                 >
                   {Math.round(show.vote_average * 10) / 10}
                 </h1>
-                 <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                Add To Favorites
-              </button>
+                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
+                  Add To Favorites
+                </button>
               </div>
-              <h1 className="font-bold text-center">{show.name}</h1>
+              <Link to={`/shows/${show.id}`}>
+                <h1 className="font-bold text-center">{show.name}</h1>
+              </Link>
+
               <p>{show.first_air_date}</p>
               <p className="font-bold relative mb-5 text-black">
                 Rating : {show.vote_average}{" "}
               </p>
-             
             </div>
           ))}
         </Carousel>

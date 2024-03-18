@@ -1,14 +1,14 @@
 import React from "react";
-import useDataFetch from "../../hooks/useDataFetch";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import getColor from "../../hooks/getColor";
-import { Link } from "react-router-dom";
-
-export const TopRatedShows = () => {
-  const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/tv/top_rated"
-  );
+import useDataFetch from "../../hooks/useDataFetch";
+export const ShowCredits = (props) => {
+  const {
+    data: results,
+    error,
+    isLoading,
+    refetch,
+  } = useDataFetch(`https://api.themoviedb.org/3/tv/${props.showId}/credits`);
   if (isLoading) {
     return (
       <div className="text-center font-bold text-yellow-400 text-2xl">
@@ -29,7 +29,7 @@ export const TopRatedShows = () => {
       </div>
     );
   }
-  if (!data || !data.results) {
+  if (!results) {
     return (
       <div className="text-center font-bold text-yellow-400 text-2xl">
         No data available.
@@ -56,8 +56,13 @@ export const TopRatedShows = () => {
   };
   return (
     <div>
-      <div>
-      <Carousel
+      <div className=" p-10 lg:flex justify-start">
+        <h1 className="font-bold text-3xl w-40 bg-yellow-500 rounded-md p-2">
+          Top Cast
+        </h1>
+      </div>
+      <div className="p-5 ">
+        <Carousel
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
@@ -69,41 +74,25 @@ export const TopRatedShows = () => {
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
-          {data.results.map((show) => (
+          {results.cast.slice(0, 15).map((cast) => (
             <div
               className="flex flex-col justify-start items-center"
-              key={show.id}
+              key={cast.id}
             >
-              <div className="mb-6 lg:flex flex-col">
-                <Link to={`/shows/${show.id}`}>
-                  <img
-                    className="object-fill rounded-md h-[250px] w-[155px] "
-                    src={
-                      "https://image.tmdb.org/t/p/original/" + show.poster_path
-                    }
-                    alt=""
-                  />
-                </Link>
-
-                <h1
-                  className={`w-7 h-7 text-center border-slate-300 border ${getColor(
-                    Math.round(show.vote_average * 10) / 10
-                  )} font-bold top-2 absolute  text-slate-800 rounded-3xl text-lg`}
-                >
-                  {Math.round(show.vote_average * 10) / 10}
-                </h1>
-                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                  Add To Favorites
-                </button>
+              <div className="mb-5 lg:flex flex-col">
+                <img
+                  className="object-fill rounded-md h-[180px] w-[120px] "
+                  src={
+                    "https://image.tmdb.org/t/p/original/" + cast.profile_path
+                  }
+                  alt=""
+                />
               </div>
-              <Link to={`/shows/${show.id}`}>
-                <h1 className="font-bold text-center">{show.name}</h1>
-              </Link>
-
-              <p>{show.first_air_date}</p>
-              <p className="font-bold relative mb-5 text-black">
-                Rating : {show.vote_average}{" "}
-              </p>
+              <h1 className="font-bold text-md text-center">{cast.name}</h1>
+              <h1 className=" italic text-sm text-center">
+                "{cast.character}"
+              </h1>
+              <p>{cast.release_date}</p>
             </div>
           ))}
         </Carousel>
