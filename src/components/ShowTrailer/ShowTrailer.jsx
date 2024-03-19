@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import YouTube from "react-youtube";
+
 export const ShowTrailer = (props) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleWindowSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleWindowSize);
+    return () => {
+      window.addEventListener("resize", handleWindowSize);
+    };
+  }, []);
   const {
     data: results,
     error,
@@ -37,10 +49,9 @@ export const ShowTrailer = (props) => {
   }
 
   const opts = {
-    height: "390",
-    width: "640",
+    height: isMobile ? "240" : "400", // Adjusted height for mobile
+    width: isMobile ? "360" : "640", // Adjusted width for mobile
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
     },
   };

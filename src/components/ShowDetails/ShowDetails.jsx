@@ -43,8 +43,7 @@ export const ShowDetails = () => {
 
   const backDropUrl = "https://image.tmdb.org/t/p/original";
   let bannerImage = backDropUrl + results.backdrop_path;
-
-
+  console.log(results);
 
   return (
     <div className="bg-gradient-to-b from-white via-blue-100 to-blue-400">
@@ -57,97 +56,90 @@ export const ShowDetails = () => {
         <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
         <div className="relative z-10 p-[20px] ">
-          <div className="lg:flex justify-center">
-            <section className="lg:flex  ">
-              <div className=" ">
-                {results.poster_path ? (
-                  <img
-                    src={
-                      "https://image.tmdb.org/t/p/original/" +
-                      results.poster_path
-                    }
-                    alt=""
-                    className="object-cover h-[500px] w-[450px] block rounded-md"
-                  />
-                ) : (
-                  <img
-                    src={
-                      "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
-                    }
-                    alt=""
-                    className="object-cover h-[450px] width-[300px] block rounded-md"
-                  />
-                )}
+          <div className="lg:flex gap-5  justify-center ">
+            {/* image div */}
+            <div className=" lg:flex p-5 ">
+              {results.poster_path ? (
+                <img
+                  className=" object-cover rounded-md h-[500px]"
+                  src={
+                    "https://image.tmdb.org/t/p/original/" + results.poster_path
+                  }
+                  alt="Movie Poster"
+                />
+              ) : (
+                <img
+                  src={
+                    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                  }
+                  alt=""
+                  className="object-cover h-[450px] width-[300px] block rounded-md"
+                />
+              )}
+            </div>
+            {/* INFO DIV*/}
+
+            <div className="lg:flex justify-start lg:w-[50rem]  flex-wrap  text-white ">
+              <div>
+                <div className="lg:flex text-wrap items-center gap-2">
+                  <h1 className="font-bold text-yellow-500 text-2xl lg:text-4xl">
+                    {results.name}
+                  </h1>
+                  <p className="text-[30px]">({results.first_air_date})</p>
+                </div>
+
+                <div className="ml-5">
+                  <ul className="lg:flex list-disc gap-10">
+                    {results.genres.map((genre) => (
+                      <li key={genre.id}>{genre.name}</li>
+                    ))}
+
+                    <li>Seasons : {results.number_of_seasons} </li>
+                  </ul>
+                </div>
+                <div className="lg:flex items-center mt-5 gap-2">
+                  <h1 className="font-bold lg:text-xl text-lg">Rating :</h1>
+                  <h1> {results.vote_average}</h1>
+                </div>
               </div>
 
-              <div className="lg:flex  h-auto text-white box-border">
-                <section className="lg:flex  flex-col  p-4">
-                  <div>
-                    <div className="lg:flex items-center gap-2">
-                      <h1 className="font-bold text-yellow-500 text-2xl lg:text-4xl">
-                        {results.name}
-                      </h1>
-                      <p className="text-lg lg:text-2xl">
-                        ({results.first_air_date})
-                      </p>
-                    </div>
+              <p className=" h-auto">{results.overview}</p>
 
-                    <div className="ml-5">
-                      <ul className="lg:flex list-disc gap-10">
-                        {results.genres.map((genre) => (
-                          <li key={genre.id}>{genre.name}</li>
-                        ))}
-
-                        <li>Seasons : {results.number_of_seasons} </li>
-                      </ul>
-                    </div>
-                    <div className="lg:flex items-center mt-5 gap-2">
-                      <h1 className="font-bold text-lg lg:text-xl">Rating :</h1>
-                      <h1> {results.vote_average}</h1>
-                    </div>
-                  </div>
-                  <div className="lg:flex mt-2 ">
-                    <p className="text-wrap">{results.overview}</p>
-                  </div>
-                  <div className="lg:flex items-center flex-wrap">
-                    <ul>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md  py-1 font-bold">
-                        Status
-                      </h1>
-                      <li className="text-md font-semibold">
-                        {results.status}
-                      </li>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md py-1 font-bold">
-                        Network
-                      </h1>
-                      <li className="text-md font-semibold">
-                        {results.networks.map((network) => (
-                          <p key={network.id}>{network.name}</p>
-                        ))}
-                      </li>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md  py-1 font-bold">
-                        Created By
-                      </h1>
-                      <li className="text-md font-semibold">
-                        {results.created_by.length > 0 ? (
-                          results.created_by.map((creator) => (
-                            <p key={creator.id}>{creator.name}</p>
-                          ))
-                        ) : (
-                          <p>N/A</p>
-                        )}
-                      </li>
-                      <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
-                        Original Language
-                      </h1>
-                      <li className="font-semibold uppercase text-md">
-                        {results.original_language}
-                      </li>
-                    </ul>
-                  </div>
-                </section>
+              <div className="lg:flex items-center flex-wrap ">
+                <ul className="">
+                  <h1 className="text-2xl text-yellow-400 rounded-md  py-1 font-bold">
+                    Status
+                  </h1>
+                  <li className="text-md font-semibold">{results.status}</li>
+                  <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md py-1 font-bold">
+                    Network
+                  </h1>
+                  <li className="text-md font-semibold">
+                    {results.networks.map((network) => (
+                      <p key={network.id}>{network.name}</p>
+                    ))}
+                  </li>
+                  <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md  py-1 font-bold">
+                    Created By
+                  </h1>
+                  <li className="text-md font-semibold">
+                    {results.created_by.length > 0 ? (
+                      results.created_by.map((creator) => (
+                        <p key={creator.id}>{creator.name}</p>
+                      ))
+                    ) : (
+                      <p>N/A</p>
+                    )}
+                  </li>
+                  <h1 className="text-xl lg:text-2xl text-yellow-400 rounded-md px-1 py-1 font-bold">
+                    Original Language
+                  </h1>
+                  <li className="font-semibold uppercase text-md">
+                    {results.original_language}
+                  </li>
+                </ul>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>

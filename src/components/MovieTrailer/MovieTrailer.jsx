@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import YouTube from "react-youtube";
 export const MovieTrailer = (props) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleWindowSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleWindowSize);
+    return () => {
+      window.addEventListener("resize", handleWindowSize);
+    };
+  }, []);
+
   const {
     data: results,
     error,
@@ -39,9 +51,9 @@ export const MovieTrailer = (props) => {
   }
 
   const opts = {
-   
+    height: isMobile ? "240" : "400", // Adjusted height for mobile
+    width: isMobile ? "360" : "640", // Adjusted width for mobile
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
     },
   };
@@ -51,19 +63,21 @@ export const MovieTrailer = (props) => {
       (vid) => vid.name === "Official Trailer" || "Trailer"
     );
     if (!results.results[0]) {
-      return <div className="font-bold text-2xl bg-yellow-500 rounded-md p-5">Sorry, this show does not have a trailer</div>;
+      return (
+        <div className="font-bold text-2xl bg-yellow-500 rounded-md p-5">
+          Sorry, this show does not have a trailer
+        </div>
+      );
     } else {
       return <YouTube videoId={trailer.key} opts={opts} />;
       //    using the react-youtube package and running the trailer key in videoId
     }
-  }
+  };
 
   return (
     <div>
       <div className="">
-        <div className=" flex max-w-[10px] justify-center  items-center">
-          <div className=""> {renderTrailer()}</div>
-        </div>
+        <div className=""> {renderTrailer()}</div>
       </div>
     </div>
   );
