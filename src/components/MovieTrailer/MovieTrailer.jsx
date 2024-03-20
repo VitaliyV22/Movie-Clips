@@ -75,8 +75,8 @@ export const MovieTrailer = (props) => {
   };
 
   return (
-    <div>
-      <div className="">
+    <div className="bg-gradient-to-t from-blue-500 ">
+      <div className="flex w-screen h-[30rem] justify-center items-center">
         <div className=""> {renderTrailer()}</div>
       </div>
     </div>

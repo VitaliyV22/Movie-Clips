@@ -60,7 +60,7 @@ export const MovieRecom = () => {
     },
   };
   return (
-    <div>
+    <div className="bg-blue-500 p-5">
       <div >
         <Carousel
           draggable={false}

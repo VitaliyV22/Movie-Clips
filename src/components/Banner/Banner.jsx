@@ -54,17 +54,18 @@ export const Banner = () => {
           </p>
           <p className="text-white text-lg">Explore Now</p>
         </div>
-        <div className="ml-5">
-          <form>
+        <div className="ml-5 ">
+          <form className="">
             <input
-              className=" outline-none font-bold text-lg rounded-l-lg px-5 py-2 overflow-hidden"
+              className=" outline-none font-bold text-lg lg:rounded-l-lg px-5 py-2 overflow-hidden"
               type="text"
               onChange={handleInputChange}
               placeholder="Search for a movie ..."
             />
             <button
               type={"submit"}
-              className="text-lg rounded-r-lg px-5 font-bold py-2 bg-yellow-400 border-l border-gray-300"
+              className="text-lg lg:rounded-r-lg px-5 font-bold py-2 bg-yellow-400 border-l border-gray-300"
+              
             >
               Search
             </button>

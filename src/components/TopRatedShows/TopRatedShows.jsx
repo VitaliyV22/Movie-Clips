@@ -4,8 +4,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import getColor from "../../hooks/getColor";
 import { Link } from "react-router-dom";
+import { useFavorites } from "../../hooks/useFavorites";
 
 export const TopRatedShows = () => {
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { data, error, isLoading, refetch } = useDataFetch(
     "https://api.themoviedb.org/3/tv/top_rated"
   );
@@ -54,10 +56,19 @@ export const TopRatedShows = () => {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
+
+  const toggleFavorite = (show) => {
+    if (isFavorite(show.id)) {
+      removeFromFavorites(show.id);
+    } else {
+      addToFavorites(show);
+    }
+  };
+
   return (
     <div>
       <div>
-      <Carousel
+        <Carousel
           draggable={false}
           responsive={responsive}
           autoPlaySpeed={1000}
@@ -77,7 +88,7 @@ export const TopRatedShows = () => {
               <div className="mb-6 lg:flex flex-col">
                 <Link to={`/shows/${show.id}`}>
                   <img
-                    className="object-fill rounded-md h-[250px] w-[155px] "
+                    className="object-fill rounded-t-md  h-[250px] w-[155px] "
                     src={
                       "https://image.tmdb.org/t/p/original/" + show.poster_path
                     }
@@ -92,8 +103,13 @@ export const TopRatedShows = () => {
                 >
                   {Math.round(show.vote_average * 10) / 10}
                 </h1>
-                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                  Add To Favorites
+                <button
+                  onClick={() => toggleFavorite(show)}
+                  className=" bg-yellow-500  rounded-b-md  w-full   text-sm p-1 font-bold"
+                >
+                  {isFavorite(show.id)
+                    ? "Remove from Favorite"
+                    : "Add To Favorites"}
                 </button>
               </div>
               <Link to={`/shows/${show.id}`}>

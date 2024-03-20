@@ -62,7 +62,7 @@ export const MovieCredits = (props) => {
 
   return (
     <div>
-        <div className=" p-10 lg:flex justify-start">
+        <div className=" p-5 lg:flex justify-start">
             <h1 className="font-bold text-3xl w-40 bg-yellow-500 rounded-md p-2">Top Cast</h1>
         </div>
       <div className="p-5 ">

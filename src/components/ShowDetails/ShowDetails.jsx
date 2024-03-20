@@ -4,7 +4,7 @@ import useDataFetch from "../../hooks/useDataFetch";
 import { ShowCredits } from "../ShowCredits/ShowCredits";
 import { ShowTrailer } from "../ShowTrailer/ShowTrailer";
 import { ShowRecom } from "../ShowRecom/ShowRecom";
-
+import { Footer } from "../Footer/Footer";
 export const ShowDetails = () => {
   const { id } = useParams();
   const {
@@ -147,24 +147,27 @@ export const ShowDetails = () => {
         <ShowCredits showId={id} />
       </div>
       <hr className="text-slate-900" />
-      <div className=" p-10 lg:flex justify-start">
+      <div className=" p-5 lg:flex justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
           Trailer
         </h1>
       </div>
-      <div className="flex justify-evenly p-12">
+      <div className="">
         <div>
           <ShowTrailer showId={id} />
         </div>
       </div>
-      <div></div>
-      <div className=" p-10 lg:flex justify-start">
+  
+      <div className="p-5 lg:flex bg-blue-500 justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
           Recommendations
         </h1>
       </div>
       <div>
         <ShowRecom />{" "}
+      </div>
+      <div className="relative bottom-0 w-full">
+        <Footer />
       </div>
     </div>
   );

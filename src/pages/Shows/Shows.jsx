@@ -3,7 +3,11 @@ import useDataFetch from "../../hooks/useDataFetch";
 import getColor from "../../hooks/getColor";
 import { ShowsMenu } from "../../components/ShowsMenu/ShowsMenu";
 import { Link } from "react-router-dom";
+import { Footer } from "../../components/Footer/Footer";
+import { useFavorites } from "../../hooks/useFavorites";
+
 export const Shows = () => {
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const [pageNumber, setPageNumber] = useState(1);
 
   const [category, setCategory] = useState("airing_today");
@@ -51,6 +55,14 @@ export const Shows = () => {
     );
   }
 
+  const toggleFavorite = (show) => {
+    if (isFavorite(show.id)) {
+      removeFromFavorites(show.id);
+    } else {
+      addToFavorites(show);
+    }
+  };
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 rounded-xl bg-gradient-to-b from-blue-100 to-blue-400 lg:px-8">
@@ -96,8 +108,13 @@ export const Shows = () => {
                       />
                     </Link>
 
-                    <button className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold">
-                      Add To Favorites
+                    <button
+                      onClick={() => toggleFavorite(show)}
+                      className=" bg-yellow-500 text-center p-2 w-full rounded-md text-sm  font-bold"
+                    >
+                      {isFavorite(show.id)
+                        ? "Remove from Favorite"
+                        : "Add To Favorites"}
                     </button>
                   </a>
                 </li>
@@ -123,6 +140,9 @@ export const Shows = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="relative bottom-0 w-screen">
+        <Footer />
       </div>
     </section>
   );

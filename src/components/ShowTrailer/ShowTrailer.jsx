@@ -70,11 +70,9 @@ export const ShowTrailer = (props) => {
 
 
   return (
-    <div>
-      <div className="">
-        <div className="  flex justify-center items-center">
-          <div> {renderTrailer()}</div>
-        </div>
+    <div className="bg-gradient-to-t from-blue-500 ">
+      <div className="flex w-screen h-[30rem] justify-center items-center">
+        <div className=""> {renderTrailer()}</div>
       </div>
     </div>
   );

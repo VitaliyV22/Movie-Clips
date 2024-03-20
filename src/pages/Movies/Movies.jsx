@@ -3,12 +3,13 @@ import useDataFetch from "../../hooks/useDataFetch";
 import { Link } from "react-router-dom";
 import { MoviesMenu } from "../../components/MoviesMenu/MoviesMenu";
 import getColor from "../../hooks/getColor";
-
+import { useFavorites } from "../../hooks/useFavorites";
+import { Footer } from "../../components/Footer/Footer";
 export const Movies = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const [category, setCategory] = useState("now_playing");
-
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   // logic for pagination
   const pageForward = () => {
     setPageNumber(pageNumber + 1);
@@ -51,8 +52,13 @@ export const Movies = () => {
       </div>
     );
   }
-
-  
+  const toggleFavorite = (movie) => {
+    if (isFavorite(movie.id)) {
+      removeFromFavorites(movie.id);
+    } else {
+      addToFavorites(movie);
+    }
+  };
 
   return (
     <section>
@@ -64,41 +70,42 @@ export const Movies = () => {
           setCategory={setCategory}
         />
 
-        {/* mobile */}
+  
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-3 lg:items-end lg:gap-8">
           <div className="lg:col-span-3">
             <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((movie) => (
                 <li key={movie.id}>
                   <Link to={`/movies/${movie.id}`}>
-                  <h3 className="text-md text-center font-bold rounded-t-xl p-2 lg:text-sm lg:truncate bg-slate-200 group-hover:underline group-hover:underline-offset-4">
-                    {movie.title}
-                  </h3>
-                  <h1
+                    <h3 className="text-md text-center font-bold rounded-t-xl p-2 lg:text-sm lg:truncate bg-slate-200 group-hover:underline group-hover:underline-offset-4">
+                      {movie.title}
+                    </h3>
+                    <h1
                       className={`w-7 h-7 text-center border-slate-300  border ${getColor(
                         Math.round(movie.vote_average * 10) / 10
                       )} font-bold text-center m-2 absolute bg-yellow-500 text-slate-800 rounded-3xl text-lg`}
                     >
                       {Math.round(movie.vote_average * 10) / 10}
                     </h1>
-                  <a
-                    href="#"
-                    className="group block  overflow-hidden"
-                  >
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/original/" +
-                        movie.poster_path
-                      }
-                      alt=""
-                      className="h-[350px] w-full object-cover sm:h-[350px]"
-                    />
+                    <a href="#" className="group block  overflow-hidden">
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/original/" +
+                          movie.poster_path
+                        }
+                        alt=""
+                        className="h-[350px] w-full object-cover sm:h-[350px]"
+                      />
                     </a>
-                   </Link>
-                    <button className=" bg-yellow-500 text-center p-2 w-full rounded-b-md text-sm  font-bold">
-                      Add To Favorites
-                    </button>
-                  
+                  </Link>
+                  <button
+                    onClick={() => toggleFavorite(movie)}
+                    className=" bg-yellow-500 text-center p-2 w-full rounded-b-md text-sm  font-bold"
+                  >
+                    {isFavorite(movie.id)
+                      ? "Remove from Favorite"
+                      : "Add To Favorites"}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -122,6 +129,9 @@ export const Movies = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="relative bottom-0 w-screen">
+        <Footer />
       </div>
     </section>
   );

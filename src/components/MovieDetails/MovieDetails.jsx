@@ -4,7 +4,7 @@ import useDataFetch from "../../hooks/useDataFetch";
 import { MovieCredits } from "../MovieCredits/MovieCredits";
 import { MovieTrailer } from "../MovieTrailer/MovieTrailer";
 import { MovieRecom } from "../MovieRecom/MovieRecom";
-
+import { Footer } from "../Footer/Footer";
 export const MovieDetails = () => {
   const { id } = useParams();
 
@@ -140,24 +140,27 @@ export const MovieDetails = () => {
         <MovieCredits movieId={id} />
       </div>
       <hr className="text-slate-900" />
-      <div className=" p-10 lg:flex justify-start">
+      <div className=" p-5 lg:flex justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
           Trailer
         </h1>
       </div>
-      <div className="flex justify-evenly p-12">
+      <div className="">
         <div>
           <MovieTrailer movieId={id} />
         </div>
       </div>
-      <div></div>
-      <div className=" p-10 lg:flex justify-start">
+     
+      <div className="p-5 lg:flex bg-blue-500 justify-start">
         <h1 className="font-bold text-3xl  bg-yellow-500 rounded-md p-2">
           Recommendations
         </h1>
       </div>
       <div>
         <MovieRecom />{" "}
+      </div>
+      <div className="relative bottom-0 w-full">
+        <Footer />
       </div>
     </div>
   );

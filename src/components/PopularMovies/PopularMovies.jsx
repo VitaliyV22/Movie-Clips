@@ -4,8 +4,13 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import getColor from "../../hooks/getColor";
 import { Link } from "react-router-dom";
+import { useFavorites } from "../../hooks/useFavorites";
 
 export const PopularMovies = () => {
+
+
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
   const { data, error, isLoading, refetch } = useDataFetch(
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page"
   );
@@ -38,6 +43,15 @@ export const PopularMovies = () => {
   }
 
  
+
+  const toggleFavorite = (movie) => {
+    if (isFavorite(movie.id)) {
+      removeFromFavorites(movie.id);
+    } else {
+      addToFavorites(movie);
+    }
+  };
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -79,7 +93,7 @@ export const PopularMovies = () => {
               <div className="mb-6  lg:flex flex-col">
                 <Link to={`/movies/${movie.id}`}>
                   <img
-                    className="object-fill  rounded-md h-[250px] w-[155px] "
+                    className="object-fill  rounded-t-md h-[250px] w-[155px] "
                     src={
                       "https://image.tmdb.org/t/p/original/" + movie.poster_path
                     }
@@ -94,8 +108,8 @@ export const PopularMovies = () => {
                 >
                   {Math.round(movie.vote_average * 10) / 10}
                 </h1>
-                <button className=" bg-yellow-500  rounded-md text-sm p-1 font-bold">
-                  Add To Favorites
+                <button onClick={() => toggleFavorite(movie)} className=" bg-yellow-500  rounded-b-md text-sm p-1 w-full   font-bold">
+                  {isFavorite(movie.id) ? "Remove from Favorite" : "Add To Favorites"}
                 </button>
               </div>
               <Link to={`/movies/${movie.id}`}>
