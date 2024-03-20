@@ -117,9 +117,7 @@ export const TopRatedShows = () => {
               </Link>
 
               <p>{show.first_air_date}</p>
-              <p className="font-bold relative mb-5 text-black">
-                Rating : {show.vote_average}{" "}
-              </p>
+              
             </div>
           ))}
         </Carousel>

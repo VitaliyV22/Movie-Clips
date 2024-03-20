@@ -104,7 +104,7 @@ export const Shows = () => {
                           show.poster_path
                         }
                         alt=""
-                        className="h-[350px] w-full object-cover  sm:h-[355px]"
+                        className="h-[350px] w-full object-cover  sm:h-[450px]"
                       />
                     </Link>
 

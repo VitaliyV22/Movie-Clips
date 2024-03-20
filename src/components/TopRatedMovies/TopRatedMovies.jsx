@@ -119,9 +119,7 @@ export const TopRatedMovies = () => {
               </Link>
 
               <p>{movie.release_date}</p>
-              <p className="font-bold relative mb-5 text-black">
-                Rating : {movie.vote_average}{" "}
-              </p>
+              
             </div>
           ))}
         </Carousel>

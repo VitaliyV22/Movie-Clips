@@ -43,7 +43,7 @@ export const ShowDetails = () => {
 
   const backDropUrl = "https://image.tmdb.org/t/p/original";
   let bannerImage = backDropUrl + results.backdrop_path;
-  console.log(results);
+ 
 
   return (
     <div className="bg-gradient-to-b from-white via-blue-100 to-blue-400">

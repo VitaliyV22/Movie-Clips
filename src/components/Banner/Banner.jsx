@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-const APITOKEN = import.meta.env.VITE_API_KEY;
 import { Link } from "react-router-dom";
+const APITOKEN = import.meta.env.VITE_API_KEY;
 
 export const Banner = () => {
   const [searchKey, setSearchkey] = useState("");
@@ -14,7 +14,7 @@ export const Banner = () => {
       query: `${searchKey}`,
       include_adult: "false",
       language: "en-US",
-      page: "1",
+      
     },
     headers: {
       accept: "application/json",
@@ -42,7 +42,7 @@ export const Banner = () => {
     }
   };
 
-
+ 
 
   return (
     <>
@@ -57,34 +57,46 @@ export const Banner = () => {
         <div className="ml-5 ">
           <form className="">
             <input
-              className=" outline-none font-bold text-lg lg:rounded-l-lg px-5 py-2 overflow-hidden"
+              className=" font-bold text-lg rounded-lg px-5 py-2 overflow-hidden"
               type="text"
               onChange={handleInputChange}
               placeholder="Search for a movie ..."
             />
-            <button
-              type={"submit"}
-              className="text-lg lg:rounded-r-lg px-5 font-bold py-2 bg-yellow-400 border-l border-gray-300"
-              
-            >
-              Search
-            </button>
           </form>
         </div>
-        <div className="bg-white ml-5 rounded-md  overflow-auto z-50 w-auto">
+
+        <div className=" ml-5  w-auto">
           {data && data.results ? (
-            <ul className="flex flex-col ">
-              {data.results.slice(0, 10).map((item) => (
+            <ul className="lg:flex flex-col absolute z-50 gap-1 rounded-lg border text-black bg-white  ">
+              {data.results.slice(0, 9).map((item) => (
                 <li
-                  className="border hover:font-semibold cursor-pointer "
+                  className="hover:border border-yellow-400 rounded-lg flex  "
                   key={item.id}
                 >
                   <Link to={`/movies/${item.id}`}>
-                    <div>{item.title}</div>
+                    <img
+                      className="object-fill cursor-pointer rounded-sm h-[50px] w-[40px] "
+                      src={
+                        "https://image.tmdb.org/t/p/original/" +
+                        item.poster_path
+                      }
+                      alt=""
+                    />
                   </Link>
-                  <Link to={`/shows/${item.id}`}>
-                    <div>{item.name}</div>
-                  </Link>
+                  <div className="flex justify-start m-2 items-center  w-full">
+                    <div>
+                      <div className="">
+                        <Link to={`/movies/${item.id}`}>
+                          <h1 className="hover:font-semibold  ">{item.title}</h1>
+                        </Link>
+                      </div>
+                      <div className="">
+                        <Link to={`/movies/${item.id}`}>
+                          <h1 className="hover:font-semibold ">{item.name}</h1>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>

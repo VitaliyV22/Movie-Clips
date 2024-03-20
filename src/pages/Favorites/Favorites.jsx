@@ -1,10 +1,10 @@
 import React from "react";
-import { Show } from "../../components/Favorite/Show/Show";
-import { Movie } from "../../components/Favorite/Movie/Movie";
 import { useFavorites } from "../../hooks/useFavorites";
 import { Link } from "react-router-dom";
 import getColor from "../../hooks/getColor";
 import { Footer } from "../../components/Footer/Footer";
+
+
 export const Favorites = () => {
   const { favorites, addToFavorites, removeFromFavorites, isFavorite } =
     useFavorites();
@@ -70,7 +70,7 @@ export const Favorites = () => {
           )}
         </div>
       </div>
-      <div className="absolute bottom-0 w-full">
+      <div className="lg:absolute top-100 bottom-0 w-full">
         <Footer />
       </div>
     </>

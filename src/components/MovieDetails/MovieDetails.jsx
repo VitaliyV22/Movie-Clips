@@ -23,14 +23,20 @@ export const MovieDetails = () => {
   }
   if (error) {
     return (
-      <div>
-        Error : {error.message}
+      
+      <div className="flex justify-center items-center w-screen h-screen">
+        <div>
+        <h1 className="font-bold text-2xl">
+        Error : {error.message} : This movie does not exist anymore in our database. Please try another movie or show
+          </h1>
         <button
-          className="text-center font-bold text-yellow-400 text-2xl"
+          className="text-center bg-yellow-400 font-bold rounded-md p-2 text-black text-2xl"
           onClick={refetch}
         >
           Retry
         </button>
+        </div>
+       
       </div>
     );
   }

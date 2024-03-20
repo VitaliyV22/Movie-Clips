@@ -35,12 +35,12 @@ export const Movies = () => {
   if (error) {
     return (
       <div>
-        Error : {error.message}
+        Error : {error.message} or the movie does not exist in the database
         <button
           className="text-center font-bold text-yellow-400 text-2xl"
           onClick={refetch}
         >
-          Retry
+          Please Retry
         </button>
       </div>
     );
@@ -60,6 +60,8 @@ export const Movies = () => {
     }
   };
 
+  
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 rounded-xl bg-gradient-to-b from-blue-100 to-blue-400 lg:px-8">
@@ -70,7 +72,6 @@ export const Movies = () => {
           setCategory={setCategory}
         />
 
-  
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-3 lg:items-end lg:gap-8">
           <div className="lg:col-span-3">
             <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -94,7 +95,7 @@ export const Movies = () => {
                           movie.poster_path
                         }
                         alt=""
-                        className="h-[350px] w-full object-cover sm:h-[350px]"
+                        className="h-[250px] w-full object-cover sm:h-[450px]"
                       />
                     </a>
                   </Link>

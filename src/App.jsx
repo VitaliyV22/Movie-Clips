@@ -5,10 +5,11 @@ import { Home } from "./pages/Home/Home";
 import { Movies } from "./pages/Movies/Movies";
 import { Shows } from "./pages/Shows/Shows";
 import { Favorites } from "./pages/Favorites/Favorites";
-import { Footer } from "./components/Footer/Footer";
+
 import { MovieDetails } from "./components/MovieDetails/MovieDetails";
 import { ShowDetails } from "./components/ShowDetails/ShowDetails";
 import { FavoritesProvider } from "./hooks/useFavorites";
+
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/movies/:id" element={<MovieDetails />} />
             <Route path="/shows" element={<Shows />} />
             <Route path="/shows/:id" element={<ShowDetails />} />
+    
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </Router>
