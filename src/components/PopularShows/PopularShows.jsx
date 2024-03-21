@@ -9,7 +9,7 @@ import { useFavorites } from "../../hooks/useFavorites";
 export const PopularShows = () => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { data, error, isLoading, refetch } = useDataFetch(
-    "https://api.themoviedb.org/3/discover/tv?include_language=en-US"
+    "https://api.themoviedb.org/3/tv/popular"
   );
   if (isLoading) {
     return (
@@ -65,7 +65,8 @@ export const PopularShows = () => {
     },
   };
 
-  
+  // filtering  system(not implemented)
+  // const filteredForUS = data.results.filter((origin) => origin.origin_country.includes("US" ||"KR" ||"ES"))
 
   return (
     <div>
@@ -105,8 +106,13 @@ export const PopularShows = () => {
                 >
                   {Math.round(show.vote_average * 10) / 10}
                 </h1>
-                <button onClick={() => toggleFavorite(show)} className=" bg-yellow-500  w-full   rounded-b-md text-sm p-1 font-bold">
-                  {isFavorite(show.id) ? "Remove from Favorite" : "Add To Favorites"}
+                <button
+                  onClick={() => toggleFavorite(show)}
+                  className=" bg-yellow-500  w-full   rounded-b-md text-sm p-1 font-bold"
+                >
+                  {isFavorite(show.id)
+                    ? "Remove from Favorite"
+                    : "Add To Favorites"}
                 </button>
               </div>
               <Link to={`/shows/${show.id}`}>
@@ -114,7 +120,6 @@ export const PopularShows = () => {
               </Link>
 
               <p>{show.first_air_date}</p>
-            
             </div>
           ))}
         </Carousel>

@@ -4,7 +4,7 @@ const APITOKEN = import.meta.env.VITE_API_KEY;
 
 const options = {
   method: "GET",
-  
+  params: {region : "US" },
   headers: {
     accept: "application/json",
     Authorization: `Bearer ${APITOKEN}`,

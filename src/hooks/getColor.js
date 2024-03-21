@@ -1,7 +1,7 @@
 const getColor = (voteAverage) => {
-  if (voteAverage > 0) {
+
     return "bg-yellow-500"
-  }
+  
 // changes color based on score, removed due to colors clashing 
   // if (voteAverage > 7) {
   //   return "bg-green-600 ";
